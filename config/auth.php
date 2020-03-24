@@ -44,8 +44,18 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
         ],
+
+        'utilisateur' => [
+            'driver' => 'session',
+            'provider' => 'utilisateurs',
+        ],
+
+        'etudiant' => [
+            'driver' => 'session',
+            'provider' => 'etudiants',
+        ],
+
     ],
 
     /*
@@ -69,6 +79,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'utilisateurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Utilisateur::class,
+        ],
+
+        'etudiants' => [
+            'driver' => 'eloquent',
+            'model' => App\Etudiant::class,
         ],
 
         // 'users' => [

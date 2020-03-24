@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+
+Route::view('/', 'welcome');
 Auth::routes();
+Auth::logout();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login/utilisateur', 'Auth\LoginController@showUtilisateurLoginForm');
+Route::get('/login/etudiant', 'Auth\LoginController@showEtudiantLoginForm');
+Route::get('/register/utilisateur', 'Auth\RegisterController@showUtilisateurRegisterForm');
+Route::get('/register/etudiant', 'Auth\RegisterController@showEtudiantRegisterForm');
+
+Route::post('/login/utilisateur', 'Auth\LoginController@utilisateurLogin');
+Route::post('/login/etudiant', 'Auth\LoginController@etudiantLogin');
+Route::post('/register/utilisateur', 'Auth\RegisterController@createUtilisateur');
+Route::post('/register/etudiant', 'Auth\RegisterController@createEtudiant');
+
+Route::view('/home', 'home')->middleware('auth');
+Route::view('/utilisateur', 'utilisateur');
+Route::view('/etudiant', 'etudiant');

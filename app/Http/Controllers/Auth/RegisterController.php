@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Utilisateur;
+use App\Etudiant;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -39,6 +41,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:utilisateur');
+        $this->middleware('guest:etudiant');
     }
 
     /**
@@ -50,10 +54,26 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showUtilisateurRegisterForm()
+    {
+        return view('auth.register', ['url' => 'utilisateur']);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showEtudiantRegisterForm()
+    {
+        return view('auth.register_e', ['url' => 'etudiant']);
     }
 
     /**
@@ -70,4 +90,45 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function createUtilisateur(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        Utilisateur::create([
+            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'email' => $request->email,
+            'login' => $request->login,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+        ]);
+        return redirect()->intended('login/utilisateur');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function createEtudiant(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        Etudiant::create([
+            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'email' => $request->email,
+            'login' => $request->login,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'numero_carte' => $request->numero_carte,
+            'option' => $request->option,
+        ]);
+        return redirect()->intended('login/etudiant');
+    }
+
 }
