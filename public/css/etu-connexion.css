@@ -1,0 +1,123 @@
+body,
+.login-block {
+    background: rgb(216, 210, 210);
+    width: 100%;
+}
+
+.login-block {
+    float: left;
+    padding: 50px 0;
+}
+
+.banner-sec {
+    background: url("/img/image.jpg") no-repeat left bottom;
+    background-size: cover;
+    min-height: 500px;
+    padding: 0;
+}
+
+.container {
+    background: #fff;
+    box-shadow: 1px 1px 2px black;
+}
+
+.login-sec {
+    padding: 50px 30px;
+    position: relative;
+}
+
+.login-sec .copy-text {
+    position: absolute;
+    width: 80%;
+    bottom: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-sec .copy-text i {
+    color: rgb(254, 138, 219);
+}
+
+.login-sec .copy-text a {
+    color: rgb(223, 80, 163);
+}
+
+.login-sec h2 {
+    margin-bottom: 30px;
+    font-weight: 800;
+    font-size: 30px;
+    color: #6967e2;
+}
+
+.login-sec h2:after {
+    content: " ";
+    width: 100px;
+    height: 5px;
+    background: rgb(254, 138, 219);
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.email,
+.motDePasse {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: solid rgb(65, 61, 61) 1px;
+    border-radius: 0;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.email input,
+.motDePasse input {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+}
+
+.btn-xl {
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.banner-text {
+    width: 80%;
+    vertical-align: middle;
+    margin: auto;
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    background: rgb(60, 147, 240);
+    ;
+    height: 430px;
+    overflow: auto;
+}
+
+.banner-text h2 {
+    color: white;
+    font-weight: 600;
+}
+
+.banner-text h2:after {
+    content: " ";
+    width: 100px;
+    height: 5px;
+    background: rgb(224, 107, 189);
+    display: block;
+    margin-top: 15px;
+    border-radius: 3px;
+}
+
+.banner-text p {
+    color: rgb(0, 2, 7);
+}
+
+h4 {
+    color: rgb(6, 48, 75);
+}

@@ -1,0 +1,147 @@
+body {
+    background: rgb(216, 210, 210);
+}
+
+.register {
+    background: #908ef1;
+    margin-top: 50px;
+    padding: 2%;
+    box-shadow: 1px 1px 4px black;
+}
+
+.register-left {
+    text-align: center;
+    color: #fff;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.register-left input {
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-top: 30%;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+
+.register-right {
+    background: #fff;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+
+.register-left h2 {
+    margin-bottom: 30px;
+    font-weight: 800;
+    font-size: 30px;
+    color: white
+}
+
+.register-left h2:after {
+    content: " ";
+    width: 100px;
+    height: 5px;
+    background: rgb(254, 138, 219);
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.register-left img {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 25%;
+    -webkit-animation: mover 2s infinite alternate;
+    animation: mover 1s infinite alternate;
+}
+
+@-webkit-keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+.register-left p {
+    font-weight: lighter;
+    padding: 12%;
+}
+
+.register .register-form {
+    padding-top: 5%;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-bottom: 1%;
+    margin-top: 1%;
+}
+
+.btnRegister {
+    margin-top: 1%;
+    border: none;
+    border-radius: 0 30px 0 30px;
+    padding: 1%;
+    background: rgb(61, 190, 241);
+    color: #fff;
+    font-weight: 800;
+    width: 100%;
+}
+
+.btnRegister:hover {
+    background: rgb(44, 238, 238);
+    transition: 1s all;
+}
+
+.btn-1 {
+    background: rgb(210, 222, 245);
+    color: rgb(84, 16, 243);
+    font-weight: 600;
+    border: 1px solid rgb(228, 210, 220);
+    border-radius: 0 30px 0 30px;
+    padding: 5px;
+    width: 70%;
+}
+
+.register-heading {
+    text-align: center;
+    margin-top: 2%;
+    font-weight: 800;
+    color: #6967e2;
+}
+
+.register-heading::after {
+    content: " ";
+    width: 100px;
+    height: 5px;
+    background: rgb(254, 138, 219);
+    display: block;
+    margin-top: 10px;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.trait input {
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: black solid 1px;
+    border-radius: 0;
+    padding-left: 0;
+}
