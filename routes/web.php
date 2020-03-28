@@ -33,4 +33,6 @@ Route::post('/register/etudiant', 'Auth\RegisterController@createEtudiant');
 
 Route::view('/home', 'home')->middleware('auth');
 Route::view('/utilisateur', 'utilisateur');
-Route::view('/etudiant', 'etudiant');
+/*Route::view('/etudiants', 'etudiants.index');*/
+Route::get('/etudiants', 'EtudiantsController@index');
+Route::view('/2', 'etudiant');

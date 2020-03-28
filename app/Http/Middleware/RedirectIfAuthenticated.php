@@ -21,11 +21,13 @@ class RedirectIfAuthenticated
             return redirect('/utilisateur');
         }
         if ($guard == "etudiant" && Auth::guard($guard)->check()) {
-            return redirect('/etudiant');
+            return redirect('/etudiants');
         }
+        /*
         if (Auth::guard($guard)->check()) {
             return redirect('/home');
         }
+        */
 
         return $next($request);
     }
