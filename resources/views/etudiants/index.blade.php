@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
                     <div class="alert alert-secondary alert-dismissible fade show wlcmsg " role="alert ">
                         <p class="msg">
-                            Bienvenue || Heureux de vous revoir, <strong>{{Auth::user()->name}}</strong>.
+                            Bienvenue || Heureux de vous revoir, <strong>{{Auth::user()->name}} {{Auth::user()->first_name}}</strong>.
                         </p>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

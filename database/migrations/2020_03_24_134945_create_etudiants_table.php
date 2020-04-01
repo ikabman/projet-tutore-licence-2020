@@ -20,10 +20,17 @@ class CreateEtudiantsTable extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('login');
-            $table->string('password');
             $table->string('phone');
-            $table->integer('numero_carte');/*id*/
-            $table->string('option');
+            $table->string('password');
+            $table->integer('numero_carte');
+            /*Cle etrangere etablissement*/
+            $table->foreignId('etablissement_id')
+                ->constrained()
+                ->onDelete('cascade');
+            /*Cle etrangere option*/
+            $table->foreignId('option_id')
+                ->constrained()
+                ->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

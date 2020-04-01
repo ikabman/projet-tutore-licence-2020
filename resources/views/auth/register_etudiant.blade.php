@@ -77,7 +77,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group trait">
                                 <select class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" value="{{ old('etablissement') }}">
                                     <option>{{ __('Faculté/Etablissement/Ecole') }}</option>
                                     @foreach($etablissements as $etablissement)

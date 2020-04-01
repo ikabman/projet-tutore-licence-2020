@@ -36,3 +36,6 @@ Route::view('/home', 'home')->middleware('auth');
 ##
 Route::get('/etudiants', 'EtudiantsController@index');
 Route::get('/utilisateurs', 'UtilisateursController@index');
+
+Route::view('/test', 'etudiant');
+

@@ -20,8 +20,16 @@ class CreateUtilisateursTable extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('login');
-            $table->string('password');
             $table->string('phone');
+            $table->string('password');
+            /*Cle etrangere etablissement*/
+            $table->foreignId('etablissement_id')
+                ->constrained()
+                ->onDelete('cascade');
+            /*Cle etrangere role*/
+            $table->foreignId('role_id')
+                ->constrained()
+                ->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

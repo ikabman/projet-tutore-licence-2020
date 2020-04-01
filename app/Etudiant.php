@@ -20,4 +20,18 @@ class Etudiant extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /* Partie non auth */
+
+    public function option(){
+        return $this->belongsTo('App\Option');
+    }
+
+    public function demandes(){
+        return $this->hasMany('App\Demande');
+    }
+
+    public function etablissement(){
+        return $this->belongsTo('App\Etablissement');
+    }
 }

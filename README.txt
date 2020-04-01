@@ -1,4 +1,9 @@
-===MODELS===
+=================== NOTES =====================
+*Sur le diagramme actualisé y'a une erreur - table Option - elle est lie a etudiant et non a etablissement
+
+=== MODELS ===
+bdd: releve_reclamation_v3
+
 1- Demande
 2- Etablissement
 3- Etape
@@ -53,11 +58,7 @@
         ex: vues des inscriptions ont besoin de -|-options-|-etablissements-|-roles
 ->
 
-
-
-
-
-=== SYSTEME MULTI AUTH V3 ===
+=== SYSTEME MULTI AUTH V3* ===
 Les modifs = branch authenticate* vient de old-state
 1- LoginController
         * auth.login => auth.login_utilisateur
@@ -66,25 +67,9 @@ Les modifs = branch authenticate* vient de old-state
 2- RegisterController
         * validatorUtilisateur
         * validatorEtudiant
-        * 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=================== NOTES =====================
-*Sur le diagramme actualisé y'a une erreur - table Option - elle est lie a etudiant et non a etablissement
+        *
+branch migrate
+1-
 
 
 

@@ -20,4 +20,15 @@ class Utilisateur extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /* Partie non auth */
+
+    public function role(){
+        return $this->belongsTo('App\Role');
+    }
+
+    public function etablissement(){
+        return $this->belongsTo('App\Etablissement');
+    }
+
 }
