@@ -32,7 +32,7 @@ Route::post('/register/utilisateur', 'Auth\RegisterController@createUtilisateur'
 Route::post('/register/etudiant', 'Auth\RegisterController@createEtudiant');
 
 Route::view('/home', 'home')->middleware('auth');
-Route::view('/utilisateur', 'utilisateur');
-/*Route::view('/etudiants', 'etudiants.index');*/
+
+##
 Route::get('/etudiants', 'EtudiantsController@index');
-Route::view('/2', 'etudiant');
+Route::get('/utilisateurs', 'UtilisateursController@index');

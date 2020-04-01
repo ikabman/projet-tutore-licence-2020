@@ -51,6 +51,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    /*
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -59,13 +60,53 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
+    */
+
+    ## permet de valider les donnees envoyes par le form inscription etudiants
+    protected function validatorEtudiant(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'login' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'option' => 'required|string|max:255',
+            'numero_carte' => 'required|integer',
+            'etablissement' => 'required|string|max:255',
+        ]);
+    }
+
+    ## permet de valider les donnees envoyes par le form creation utilisateur
+    protected function validatorUtilisateur(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'login' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|string|max:255',
+            'etablissement' => 'required|string|max:255',
+        ]);
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+    ##
     public function showUtilisateurRegisterForm()
     {
-        return view('auth.register', ['url' => 'utilisateur']);
+        $roles = \App\Role::select('id', 'libelle')->orderBy('libelle')->get();
+        $etablissement= \App\Etablissement::select('id', 'libelle', 'libelle_court')->orderBy('libelle')->get();
+
+        return view('auth.register_utilisateur', [
+            'url' => 'utilisateur',
+            'etablissements' => $etablissement,
+            'roles' => $roles,
+            ]);
     }
 
     /**
@@ -73,7 +114,14 @@ class RegisterController extends Controller
      */
     public function showEtudiantRegisterForm()
     {
-        return view('auth.register_e', ['url' => 'etudiant']);
+        $options = \App\Option::select('id', 'libelle')->orderBy('libelle')->get();
+        $etablissement= \App\Etablissement::select('id', 'libelle', 'libelle_court')->orderBy('libelle')->get();
+
+        return view('auth.register_etudiant', [
+            'url' => 'etudiant',
+            'etablissements' => $etablissement,
+            'options' => $options,
+            ]);
     }
 
     /**
@@ -98,7 +146,7 @@ class RegisterController extends Controller
      */
     protected function createUtilisateur(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->validatorUtilisateur($request->all())->validate();
         Utilisateur::create([
             'name' => $request->name,
             'first_name' => $request->first_name,
@@ -106,6 +154,8 @@ class RegisterController extends Controller
             'login' => $request->login,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
+            'etablissement_id' => $request->etablissement,
+            'role_id' => $request->role,
         ]);
         return redirect()->intended('login/utilisateur');
     }
@@ -117,7 +167,7 @@ class RegisterController extends Controller
      */
     protected function createEtudiant(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $this->validatorEtudiant($request->all())->validate();
         Etudiant::create([
             'name' => $request->name,
             'first_name' => $request->first_name,
@@ -126,7 +176,8 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'numero_carte' => $request->numero_carte,
-            'option' => $request->option,
+            'etablissement_id' => $request->etablissement,
+            'option_id' => $request->option,
         ]);
         return redirect()->intended('login/etudiant');
     }

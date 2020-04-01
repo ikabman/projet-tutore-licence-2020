@@ -1,5 +1,5 @@
 <!--
-    Titre: register_e
+    Titre: register_etudiant
     Description: cette page remplace la page originel "etu-inscription"
     P.S: prendre en compte ce renommage; ne pas le changer.
 
@@ -7,11 +7,18 @@
     1- Retrait de layouts->app
     2- Ajout du champ etablissement ms commenté pr l moment*
     3- titre => Inscription etudiant
+    4- script sql pr 'option'
+    5- script sql pr 'etablissement'
 
     ----Reste à changer ----------
     1- Ajouter les scripts de select de Option et de Faculté
-    2- 
+    2-
+
+    --- warning ---
+    1- controllers renvoyer 'options'
+    2-                      'etablissements'
 -->
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -70,9 +77,15 @@
                                     </span>
                                 @enderror
                             </div>
-                            <!--
                             <div class="form-group row">
-                                <input id="etablissement" type="text" class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" value="{{ old('etablissement') }}" required autocomplete="etablissement">
+                                <select class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" value="{{ old('etablissement') }}">
+                                    <option>{{ __('Faculté/Etablissement/Ecole') }}</option>
+                                    @foreach($etablissements as $etablissement)
+                                        <option value="{{$etablissement['id']}}">
+                                            {{$etablissement['libelle']}} @if($etablissement['libelle_court']!=null)({{$etablissement['libelle_court']}})@endif
+                                        </option>
+                                    @endforeach
+                                </select>
 
                                 @error('etablissement')
                                     <span class="invalid-feedback" role="alert">
@@ -80,9 +93,15 @@
                                     </span>
                                 @enderror
                             </div>
-                            -->
                             <div class="form-group trait">
-                                <input id="option" type="text" class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option') }}" required autocomplete="option" placeholder="Option temp">
+                                <select class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option') }}">
+                                    <option>{{ __('Option/Departement/Filière') }}</option>
+                                    @foreach($options as $option)
+                                        <option value="{{$option['id']}}">
+                                            {{$option['libelle']}}
+                                        </option>
+                                    @endforeach
+                                </select>
 
                                 @error('option')
                                     <span class="invalid-feedback" role="alert">
@@ -155,3 +174,25 @@
         </div>
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,7 @@
 5- create_unite_enseignements_table
                 -> reclamation_id
 
-=== SYSTEME MULTI AUTH ===
+=== SYSTEME MULTI AUTH V4 ===
 -> model etudiant
 -> model Utilisateur
 -> guards (auth.php)
@@ -57,7 +57,16 @@
 
 
 
-
+=== SYSTEME MULTI AUTH V3 ===
+Les modifs = branch authenticate* vient de old-state
+1- LoginController
+        * auth.login => auth.login_utilisateur
+        * auth.login_e => auth.login_etudiant
+        * j'ai créé UtilisateursController et EtudiantsController
+2- RegisterController
+        * validatorUtilisateur
+        * validatorEtudiant
+        * 
 
 
 

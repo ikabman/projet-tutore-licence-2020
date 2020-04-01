@@ -1,8 +1,8 @@
 <!--
-    Titre: login_e
+    Titre: login_etudiant
     Description: cette page remplace la page originel "etu-connexion"
     P.S: prendre en compte ce renommage; ne pas le changer.
-    
+
     ----Changements effectués----------
     1- Retrait de layouts->app
     2- Ajout de
