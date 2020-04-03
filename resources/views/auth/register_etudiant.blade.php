@@ -79,7 +79,7 @@
                             </div>
                             <div class="form-group trait">
                                 <select class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" value="{{ old('etablissement') }}">
-                                    <option>{{ __('Faculté/Etablissement/Ecole') }}</option>
+                                    <option selected>{{ __('Faculté/Etablissement/Ecole') }}</option>
                                     @foreach($etablissements as $etablissement)
                                         <option value="{{$etablissement['id']}}">
                                             {{$etablissement['libelle']}} @if($etablissement['libelle_court']!=null)({{$etablissement['libelle_court']}})@endif
@@ -95,7 +95,7 @@
                             </div>
                             <div class="form-group trait">
                                 <select class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option') }}">
-                                    <option>{{ __('Option/Departement/Filière') }}</option>
+                                    <option selected>{{ __('Option/Departement/Filière') }}</option>
                                     @foreach($options as $option)
                                         <option value="{{$option['id']}}">
                                             {{$option['libelle']}}

@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="text-center">
-                                <small>Pas de compte?<a href="#"> S'inscrire</a></small>
+                                <small>Pas de compte?<a href="/register/etudiant"> S'inscrire</a></small>
                             </div>
 
                         </form>

@@ -12,12 +12,12 @@
   <title>Relevés & Reclamations</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-  <link href="css/releve-reclam.css" rel="stylesheet">
+  <link href="/css/sb-admin-2.css" rel="stylesheet">
+  <link href="/css/releve-reclam.css" rel="stylesheet">
 
 </head>
 
@@ -48,9 +48,9 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/etudiants">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Acceuil</span></a>
       </li>
 
       <!-- Divider -->
@@ -167,16 +167,16 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/user.png">
+                <img class="img-profile rounded-circle" src="/img/user.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in dropdown-list " aria-labelledby="userDropdown">
                 <div class="dropdown-header" >
                     <div class="row">
                         <div class="col-lg-12 ">
-                            <p><b>Numero de carte :</b> 418963</p>
-                            <p><b>Nom :</b> TCHAKALA</p>
-                            <p><b>Prenom :</b> Fridosse</p>
+                            <p><b>Numero de carte :</b> {{Auth::user()->numero_carte}}</p>
+                            <p><b>Nom :</b> {{Auth::user()->name}}</p>
+                            <p><b>Prenom :</b> {{Auth::user()->first_name}}</p>
                         </div>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                   Changer de mot de passe
                 </a>
                 <!--**-->
-                <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     {{ __('Deconnexion*') }}
                 </a>
@@ -228,6 +228,7 @@
   </a>
 
   <!-- Logout Modal-->
+  <!--
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -245,13 +246,14 @@
       </div>
     </div>
   </div>
+  -->
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.js"></script>
+  <script src="/js/sb-admin-2.js"></script>
 
 </body>
 

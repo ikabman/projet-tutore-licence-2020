@@ -37,5 +37,13 @@ Route::view('/home', 'home')->middleware('auth');
 Route::get('/etudiants', 'EtudiantsController@index');
 Route::get('/utilisateurs', 'UtilisateursController@index');
 
-Route::view('/test', 'etudiant');
+##Route des resources Controller Releve
+Route::get('/etudiants/releves/create', 'RelevesController@create');
+Route::post('/releves', 'RelevesController@store');
+
+##Route des resources Controller Releve
+Route::get('/etudiants/reclamations/create', 'ReclamationsController@create');
+Route::post('/reclamations', 'ReclamationsController@store');
+
+
 

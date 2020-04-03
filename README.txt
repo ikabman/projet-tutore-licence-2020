@@ -1,6 +1,6 @@
 =================== NOTES =====================
 *Sur le diagramme actualisé y'a une erreur - table Option - elle est lie a etudiant et non a etablissement
-
+*
 === MODELS ===
 bdd: releve_reclamation_v3
 
@@ -70,7 +70,34 @@ Les modifs = branch authenticate* vient de old-state
         *
 branch migrate
 1-
-
+=== RelevesControllers ===
+1- Ajout du champ type_releve ds la table Releve
+2- On doit créé un middleware only('store') pr controller le payement.
+3- Etapes - id
+    'Depôt' -> 1
+	'Imprimé' -> 2
+	'Vérification' -> 3
+    'Signature' -> 4
+	'Traité' -> 5
+4- Pour les routes des resources Controllers pour @create seront nommés de la manière suivante :
+    *Etudiants :
+        .Prefix -> /etudiants
+        .On y ajoute la nomenclature conventionnelle
+        .Ex: la route pour les demandes de releve pour un etudiant sera -> /etudiants/releves/create
+    *Utilisateur :
+        .Prefix -> /utilisateurs
+        .On y ajoute la nomenclature conventionnelle
+        .Ex: _____
+    *Justification :
+        .Si l'on ne fait pas de cette façon le "Handler" va tenter en vain de rediriger l'etudiant vers la page de login
+        .Or il ne reussira pas car l'etudiant sera déjà connecté donc le lien retournera sans cesse vers la même page.
+        .Ne pas faire de même pr les methodes avk pr action qutre que 'get' - ça ne marche pas!
+5- Pre-requis de 4:
+    *Etudiants :
+        .Le middleware doit être "auth:etudiant"
+    *Utilisateur :
+        .Le middleware doit être "auth:utilisateur"
+        .On pourra en fonction des 'resouces' utiliser 'only' et 'except' sur les middleware
 
 
 

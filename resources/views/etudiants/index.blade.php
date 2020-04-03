@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
                     <div class="alert alert-secondary alert-dismissible fade show wlcmsg " role="alert ">
                         <p class="msg">
-                            Bienvenue || Heureux de vous revoir, <strong>{{Auth::user()->name}} {{Auth::user()->first_name}}</strong>.
+                            Bienvenue, <strong>{{Auth::user()->name}} {{Auth::user()->first_name}}</strong>.
                         </p>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -30,9 +30,9 @@
                                 <i class="fas fa-user fa-4x text-gray-300"></i>
                             </div>
                             <div class="col">
-                                <div class="text-primary font-weight-bold text-uppercase ">AMOUZOU Kokou Benjamin</div>
-                                <div class="font-weight-bold   mb-1"><span class="">N<sup>o</sup> de Carte : </span> 435124</div>
-                                <div class="text-black-50 font-weight-bold  mb-0"><span class="">Tel : </span>92 00 11 33</div>
+                                <div class="text-primary font-weight-bold text-uppercase">{{Auth::user()->name}} {{Auth::user()->first_name}}</div>
+                                <div class="font-weight-bold   mb-1"><span class="">N<sup>o</sup> de Carte : </span> {{Auth::user()->numero_carte}}</div>
+                                <div class="text-black-50 font-weight-bold  mb-0"><span class="">Tel : </span>{{Auth::user()->phone}}</div>
                             </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                                 <i class="fas fa-school fa-4x text-gray-300"></i><i class=""></i>
                             </div>
                             <div class="col">
-                                <div class="text-black-50 font-weight-bold  mb-0"><span class="">Etablissement : </span> CIC </div>
+                                <div class="text-black-50 font-weight-bold  mb-0"><span class="">Etablissement : </span>  <p class="text-primary my-1 text-uppercase"> {{Auth::user()->etablissement->libelle}} </p> </div>
                             </div>
                             </div>
                         </div>
@@ -56,16 +56,16 @@
             <!-- ligne des boutons de demandes -->
             <div class="row my-4">
                 <div class="col-lg-6 ">
-                    <button class="card bg-gradient-primary text-white shadow float-right">
+                    <a href="/etudiants/releves/create" class="card bg-gradient-primary text-white shadow float-right text-uppercase">
                         <div class="card-body">
                             Demande de relevé
                         </div>
-                    </button>
+                    </a>
                 </div>
                 <div class="col-lg-6 ">
-                    <button class="card bg-success text-white shadow">
+                    <button href="#" class="card bg-success text-white shadow">
                         <div class="card-body">
-                            Reclamations de notes
+                            <a href="/etudiants/reclamations/create" class="text-white text-uppercase">Reclamations de notes</a>
                         </div>
                     </button>
                 </div>

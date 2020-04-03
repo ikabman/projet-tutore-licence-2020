@@ -17,6 +17,7 @@ class CreateRelevesTable extends Migration
             $table->id();
             $table->date('date_retrait')->nullable();
             $table->string('annee_du_releve');
+            $table->string('type_releve');
             $table->timestamps();
         });
     }
