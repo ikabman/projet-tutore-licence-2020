@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Demande;
+use App\Etudiant;
+use App\Releve;
+use App\Reclamation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UtilisateursController extends Controller
 {
@@ -18,7 +24,21 @@ class UtilisateursController extends Controller
      */
     public function index()
     {
-        return view('utilisateurs.index');
+        $utilisateur = Auth::user();
+        $demandes = Demande::all(); ##On doit y ajouter une clause where permettant de n selectionner q les demandes de l'ets
+        $releves = Releve::all(); ##""
+        $reclamations = Reclamation::all(); ##""
+        $etudiants = Etudiant::all(); ##""
+        $nEtudiants = count($etudiants);
+        $nReclamations = count($reclamations);
+        $nReleves = count($releves);
+
+        return view('utilisateurs.index', compact([
+            'demandes',
+            'nEtudiants',
+            'nReclamations',
+            'nReleves'
+        ]));
     }
 
     /**
