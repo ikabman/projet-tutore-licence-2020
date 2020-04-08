@@ -56,7 +56,7 @@
                                 <div class="text-md font-weight-bold text-info text-uppercase mb-2 ">demandes de relevés</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800 mx-2">
                                     <span class="badge badge-pill badge-info">{{$nReleves}}</span>
-                                    <span><sup>(1 def, 10 temp)</sup></span>
+                                    <span><sup>({{$nRel_def}} def,{{$nRel_inter}} inter)</sup></span>
                                 </div>
                             </div>
                         </div>
@@ -68,30 +68,30 @@
         <!-- Ligne des graphiques -->
         <div class="row my-5">
             <div class="col-lg-7">
-                <div class="card shadow mb-4">
+                <div class="card shadow mb-4 pb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Relevés/étapes</h6>
                     </div>
-                    <div class="card-body bg-white">
+                    <div class="card-body bg-white ">
                         <h6 class="text-dark text-md">Depôt</h6>
                         <div class="progress mb-1">
-                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{$p_depot}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h6 class="text-dark text-md">Imprimé</h6>
                         <div class="progress mb-1">
-                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{$p_imprime}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h6 class="text-dark text-md">Vérification</h6>
                         <div class="progress mb-1">
-                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{$p_verification}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h6 class="text-dark text-md">Signature</h6>
                         <div class="progress mb-1">
-                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 53%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{$p_signature}}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h6 class="text-dark text-md">Traité</h6>
                         <div class="progress mb-1">
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 14%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{$p_traite}}%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
@@ -99,12 +99,14 @@
             <div class="col-lg-5">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
+                    <!--
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                      <h6 class="h4 m-0 font-weight-bold text-primary">Demandes</h6>
+                      <h6 class="h6 m-0 font-weight-bold text-primary">Demandes</h6>
                     </div>
+                    -->
                     <!-- Card Body -->
                     <div class="card-body">
-                        <div class="chart-pie pt-4 pb-2">
+                        <div class="chart-pie pt-4 pb-1">
                             <img src="/img/chart.png" class="img-fluid" alt="Graphique illustration">
                         </div>
                         <div class="mt-4 text-center">
@@ -132,7 +134,6 @@
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Etudiant</th>
-                                <th scope="col">Type de demande</th>
                                 <th scope="col">Date de dépôt</th>
                                 <th scope="col">Etat</th>
                                 <th scope="col">Etape</th>
@@ -142,21 +143,21 @@
                                 @foreach($demandes as $demande)
                                     <tr>
                                         <th scope="row">{{ $demande->id}}</th>
-                                        <td>{{ $demande->etudiant->name}}</td>
-                                        <td>
-                                            {{ $demande->demandeable_type }}
-                                        </td>
+                                        <td>{{ $demande->name}} {{ $demande->first_name}}</td>
                                         <td>{{ $demande->date_depot }}</td>
                                         <td>
-                                            <span class="badge badge-pill badge-success">{{ $demande->etat }}</span>
+                                            <span class="badge badge-pill badge-info">{{ $demande->etat }}</span>
                                         </td>
                                         <td class="h5">
-                                            <span class="badge badge-success">{{ $demande->etape->libelle }}</span>
+                                            <span class="badge badge-dark">{{ $demande->libelle_etape }}</span>
                                         </td>
                                     </tr>
                               @endforeach
                             </tbody>
                           </table>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="#" class="btn btn-primary btn-md">Voir plus</a>
                     </div>
                 </div>
             </div>

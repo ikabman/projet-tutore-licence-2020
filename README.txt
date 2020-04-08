@@ -99,13 +99,83 @@ branch migrate
         .Le middleware doit être "auth:utilisateur"
         .On pourra en fonction des 'resouces' utiliser 'only' et 'except' sur les middleware
 
+6- Requêtes nécessaires pour les donnees utilisateur
+    * Selectionner tous les étudiants inscrits dans un etablissement donné
+    * Les demandes de reclamation pour un etablissement donné
+    * Les demandes de releve pour un etablissement donné
+    * Le nbre de dmd de rel temporaires pr en ets donné
+    * Le nbre de dmd de rel definitifs pr en ets donné
 
+    Requete 1:
+        * Selectionner tous les étudiants inscrits dans un etablissement donné
+        $etudiants = DB::select('
+            SELECT *
+            FROM etudiants e
+            WHERE e.etablissement_id ='.$utilisateur->etablissement_id;
+        );
+            .Tables concernés :
+                -> etudiants
+                -> utilisateurs
+                -> etablissements
 
+        * Les demandes de reclamation pour un etablissement donné
+        $reclamations = DB::select('
+            SELECT r.id
+            FROM reclamations r, demandes d, etudiants e
+            WHERE r.id = d.demandeable_id
+            AND d.etudiant_id = e.id
+            AND e.etablissement_id = '.$utilisateur->etablissement_id
+        );
+            .Tables concernés :
+                -> reclamations
+                -> demandes
+                -> etudiants
+                -> etablissements
+                -> utilisateurs
 
+        * Les demandes de releve pour un etablissement donné
+        $releves = DB::select('
+            SELECT *
+            FROM releves r, demandes d, etudiants e
+            WHERE r.id = d.demandeable_id
+            AND d.etudiant_id = e.id
+            AND e.etablissement_id = '.$utilisateur->etablissement_id
+        );
+            .Tables concernés :
+                -> releves
+                -> demandes
+                -> etudiants
+                -> etablissements
+                -> utilisateurs
 
+        * Le nbre de dmd de rel temporaires pr en ets donné
+        $rel_temp = DB::select('
+            SELECT *
+            FROM releves r, demandes d, etudiants e
+            WHERE r.type_releve = "definitif"
+            AND r.id = d.demandeable_id
+            AND d.etudiant_id = e.id
+            AND e.etablissement_id = '.$utilisateur->etablissement_id
+        );
+            .Tables concernés :
+                -> releves
+                -> demandes
+                -> etudiants
+                -> etablissements
+                -> utilisateurs
 
-
-
+        * Selectionner les demandes pr un ets donné
+        $demandes = DB::select('
+            SELECT *
+            FROM demandes d, etudiants e
+            WHERE d.etudiant_id = e.id
+            AND e.etablissement_id ='.$utilisateur->etablissement_id
+        );
+            .Tables concernés :
+                -> demandes
+                -> etudiants
+                -> etablissements
+                -> utilisateurs
 
 
 

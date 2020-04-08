@@ -49,7 +49,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/utilisateurs">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -118,7 +118,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Tako Rinco</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-900 small">{{Auth::user()->name}} {{Auth::user()->first_name}}</span>
                 <img class="img-profile rounded-circle" src="img/user.png">
               </a>
               <!-- Dropdown - User Information -->
@@ -164,7 +164,7 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
+  <a class="scroll-to-top rounded-circle" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
@@ -173,15 +173,21 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><span class="text-capitalize">êtes</span>-vous sûre ?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Choisir "se déconnecter" si vous etes près à vous déconnecter</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="#">Logout</a>
+            <button class="btn btn-info btn-sm" type="button" data-dismiss="modal">Annuler</button>
+            <a class="btn btn-danger btn-sm" href="{{ route('logout') }}" data-toggle="modal" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Se déconnecter') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+            </form>
         </div>
       </div>
     </div>
