@@ -94,57 +94,62 @@ class UtilisateursController extends Controller
         ##Pourcentage ops
         $Rel_depot = DB::select('
             SELECT *
-            FROM releves r, demandes d, etapes et
+            FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
             AND et.libelle = "Dépôt"
             AND et.type = "releve"
-        ');
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
         $nRel_depot = COUNT($Rel_depot);
         $p_depot = 100 * ($nRel_depot/$nReleves);
 
         $Rel_imprime = DB::select('
             SELECT *
-            FROM releves r, demandes d, etapes et
+            FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
             AND et.libelle = "Imprimé"
             AND et.type = "releve"
-        ');
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
         $nRel_imprime = COUNT($Rel_imprime);
         $p_imprime = 100 * ($nRel_imprime/$nReleves);
 
         $Rel_verification = DB::select('
             SELECT *
-            FROM releves r, demandes d, etapes et
+            FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
             AND et.libelle = "Vérification"
             AND et.type = "releve"
-        ');
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
         $nRel_verification = COUNT($Rel_verification);
         $p_verification = 100 * ($nRel_verification/$nReleves);
 
         $Rel_signature = DB::select('
             SELECT *
-            FROM releves r, demandes d, etapes et
+            FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
             AND et.libelle = "Signature"
             AND et.type = "releve"
-        ');
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
         $nRel_signature = COUNT($Rel_signature);
         $p_signature = 100 * ($nRel_signature/$nReleves);
 
 
         $Rel_traite = DB::select('
             SELECT *
-            FROM releves r, demandes d, etapes et
+            FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
             AND et.libelle = "Traité"
             AND et.type = "releve"
-        ');
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
         $nRel_traite = COUNT($Rel_traite);
         $p_traite = 100 * ($nRel_traite/$nReleves);
 

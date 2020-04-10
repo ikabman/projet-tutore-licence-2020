@@ -33,17 +33,21 @@ Route::post('/register/etudiant', 'Auth\RegisterController@createEtudiant');
 
 Route::view('/home', 'home')->middleware('auth');
 
-##
-Route::get('/etudiants', 'EtudiantsController@index');
-Route::get('/utilisateurs', 'UtilisateursController@index');
+##Route des resources Controller Etudiant
+Route::get('/etudiants', 'EtudiantsController@index');#page acceuil pr etudiant
+Route::get('/etudiants/reclamations/create', 'ReclamationsController@create');#page de etudiant pour faire une reclamation
+Route::post('/reclamations', 'ReclamationsController@store');#stockage d'une reclamation
+Route::get('/etudiants/releves/create', 'RelevesController@create');#page de etudiant pour faire une demande releve
+Route::post('/releves', 'RelevesController@store');#stockage reclamation
 
-##Route des resources Controller Releve
-Route::get('/etudiants/releves/create', 'RelevesController@create');
-Route::post('/releves', 'RelevesController@store');
+##Route des resources Controller Utilisateur
+Route::get('/utilisateurs', 'UtilisateursController@index');#acceuil utilisateur
+Route::get('/utilisateurs/releves', 'RelevesController@index');#page de recap de releve
+Route::get('/utilisateurs/reclamations', 'ReclamationsController@index');#page de recap de reclamation
+Route::get('/utilisateurs/reclamations/depots', 'DepotReclamationsController@index');# page index des reclamations a l'etape depot
+Route::get('/utilisateurs/reclamations/verifications', 'VerificationReclamationsController@index');# page index des reclamations a l'etape verification
+Route::get('/utilisateurs/reclamations/traites', 'TraiteReclamationsController@index');# page index des reclamations a l'etape traite
 
-##Route des resources Controller Releve
-Route::get('/etudiants/reclamations/create', 'ReclamationsController@create');
-Route::post('/reclamations', 'ReclamationsController@store');
 
 
 

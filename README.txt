@@ -74,11 +74,16 @@ branch migrate
 1- Ajout du champ type_releve ds la table Releve
 2- On doit créé un middleware only('store') pr controller le payement.
 3- Etapes - id
+        * releve
     'Depôt' -> 1
 	'Imprimé' -> 2
 	'Vérification' -> 3
     'Signature' -> 4
 	'Traité' -> 5
+        * reclamation
+    'Depôt' -> 6
+	'Vérification' -> 7
+	'Traité' -> 8
 4- Pour les routes des resources Controllers pour @create seront nommés de la manière suivante :
     *Etudiants :
         .Prefix -> /etudiants
@@ -176,8 +181,10 @@ branch migrate
                 -> etudiants
                 -> etablissements
                 -> utilisateurs
-
-
+7- Creation de EtapeReclamationsController et EtapeReleveController
+    Il permet de gerer les donnees utilisateurs lorsqu'il doit acceder aux pages des
+    differentes etapes pour les releves et les reclamations
+    
 
 
 

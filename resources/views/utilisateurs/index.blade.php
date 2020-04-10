@@ -129,7 +129,7 @@
                         <h4 class="text-primary">Demandes récentes</h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover ">
+                        <table class="table table-sm table-hover ">
                             <thead >
                               <tr>
                                 <th scope="col">#</th>

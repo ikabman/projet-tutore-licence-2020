@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Reclamation;
+use App\Demande;
 use App\Etudiant;
+use App\Releve;
+use App\Reclamation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,7 +15,9 @@ class ReclamationsController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('auth:etudiant');
+        $this->middleware('auth:etudiant')->only('create', 'store');
+
+        $this->middleware('auth:utilisateur')->only('index');
     }
 
     ##Fonction qui s'occupe de valider les demandes de reclamation
@@ -33,9 +38,107 @@ class ReclamationsController extends Controller
      */
     public function index()
     {
-        //
+        $utilisateur = Auth::user();
+
+        #Selectionner les demandes pr un ets donné
+        $Rec_depots = DB::select('
+            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
+            WHERE d.demandeable_id = r.id
+            AND d.etudiant_id = e.id
+            AND d.etape_id = et.id
+            AND et.libelle = "Dépôt"
+            AND et.type = "reclamation"
+            AND u.reclamation_id = r.id
+            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
+            LIMIT 5'
+        );
+        $nRec_depots = count($Rec_depots);
+
+
+        $Rec_verifications = DB::select('
+            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
+            WHERE d.demandeable_id = r.id
+            AND d.etudiant_id = e.id
+            AND d.etape_id = et.id
+            AND et.libelle = "Vérification"
+            AND et.type = "reclamation"
+            AND u.reclamation_id = r.id
+            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
+            LIMIT 5'
+        );
+        $nRec_verifications = count($Rec_verifications);
+
+        $Rec_traites = DB::select('
+            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
+            WHERE d.demandeable_id = r.id
+            AND d.etudiant_id = e.id
+            AND d.etape_id = et.id
+            AND et.libelle = "Traité"
+            AND et.type = "reclamation"
+            AND u.reclamation_id = r.id
+            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
+            LIMIT 5'
+        );
+        $nRec_traites = count($Rec_traites);
+
+        return view('utilisateurs.admin-reclamations-recap', compact([
+            'Rec_depots',
+            'Rec_verifications',
+            'Rec_traites',
+        ]));
     }
 
+    /*public function data()
+    {
+        $utilisateur = Auth::user();
+        dd($utilisateur);
+
+        $depots = DB::select('
+            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
+            WHERE d.demandeable_id = r.id
+            AND d.etudiant_id = e.id
+            AND d.etape_id = et.id
+            AND et.libelle = "Dépôt"
+            AND et.type = "reclamation"
+            AND u.reclamation_id = r.id
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
+
+        $verifications = DB::select('
+            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
+            WHERE d.demandeable_id = r.id
+            AND d.etudiant_id = e.id
+            AND d.etape_id = et.id
+            AND et.libelle = "Vérification"
+            AND et.type = "reclamation"
+            AND u.reclamation_id = r.id
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
+
+        $traites = DB::select('
+        SELECT r.id, e.name, e.first_name, u.code, u.type_note
+        FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
+        WHERE d.demandeable_id = r.id
+        AND d.etudiant_id = e.id
+        AND d.etape_id = et.id
+        AND et.libelle = "Traité"
+        AND et.type = "reclamation"
+        AND u.reclamation_id = r.id
+        AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
+
+        return view('utilisateurs.admin-depot-reclam', compact([
+            'depots',
+            'verifications',
+            'traites',
+        ]));
+
+    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -75,7 +178,7 @@ class ReclamationsController extends Controller
             'date_depot' => date('Y-m-d H:i:s'),
             'etat' => 'En cours',
             'etudiant_id' => $etudiant->id,
-            'etape_id' => 1,
+            'etape_id' => 6,
         ]);
 
         ##Doit declencher le middleware de payement et apres retour vers ?? apres retouner sur l'acceuil avec un message lui disant que la demande a été enregistré
