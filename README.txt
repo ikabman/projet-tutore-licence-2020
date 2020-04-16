@@ -1,6 +1,6 @@
 =================== NOTES =====================
 *Sur le diagramme actualisé y'a une erreur - table Option - elle est lie a etudiant et non a etablissement
-*
+* master -> intgrate -> modif
 === MODELS ===
 bdd: releve_reclamation_v3
 
