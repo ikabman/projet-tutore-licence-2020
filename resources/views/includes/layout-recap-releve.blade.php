@@ -10,19 +10,29 @@
     <div class="navbar navbar-expand-lg navbar-white diapo-nav-style bg-white mb-5 bg-white rounded">
         <div class="row diapo-style">
             <div class="col order-first  activ-box activ-etap1 diapo-cont">
-                <img src="/img/etape1.png"/>
+                <a href="/utilisateurs/releves/depots">
+                    <img src="/img/etape1.png"/>
+                </a>
             </div>
             <div class="col diapo-cont">
-                <img src="/img/etape2.png"/>
+                <a href="/utilisateurs/releves/impressions">
+                    <img src="/img/etape2.png"/>
+                </a>
             </div>
             <div class="col diapo-cont ">
-                <img src="/img/etape3.png"/>
+                <a href="/utilisateurs/releves/verifications">
+                    <img src="/img/etape3.png"/>
+                </a>
             </div>
             <div class="col diapo-cont">
-                <img src="/img/etape4.png"/>
+                <a href="/utilisateurs/releves/signatures">
+                    <img src="/img/etape4.png"/>
+                </a>
             </div>
             <div class="col order-last diapo-cont">
-                <img src="/img/etape5.png"/>
+                <a href="/utilisateurs/releves/traites">
+                    <img src="/img/etape5.png"/>
+                </a>
             </div>
         </div>
     </div>

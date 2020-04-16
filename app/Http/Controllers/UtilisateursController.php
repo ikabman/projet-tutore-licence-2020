@@ -50,7 +50,7 @@ class UtilisateursController extends Controller
         $releves = DB::select('
             SELECT *
             FROM releves r, demandes d, etudiants e
-            WHERE r.id = d.demandeable_id
+            WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
             AND e.etablissement_id = '.$utilisateur->etablissement_id
         );
@@ -88,7 +88,7 @@ class UtilisateursController extends Controller
             WHERE d.etape_id = et.id
             AND d.etudiant_id = e.id
             AND e.etablissement_id ='.$utilisateur->etablissement_id.'
-            LIMIT 2'
+            LIMIT 3'
         );
 
         ##Pourcentage ops
@@ -97,6 +97,7 @@ class UtilisateursController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
+            AND d.etudiant_id = e.id
             AND et.libelle = "Dépôt"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
@@ -109,6 +110,7 @@ class UtilisateursController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
+            AND d.etudiant_id = e.id
             AND et.libelle = "Imprimé"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
@@ -121,6 +123,7 @@ class UtilisateursController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
+            AND d.etudiant_id = e.id
             AND et.libelle = "Vérification"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
@@ -133,6 +136,7 @@ class UtilisateursController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
+            AND d.etudiant_id = e.id
             AND et.libelle = "Signature"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
@@ -146,6 +150,7 @@ class UtilisateursController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etape_id = et.id
+            AND d.etudiant_id = e.id
             AND et.libelle = "Traité"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
