@@ -39,6 +39,8 @@ Route::get('/etudiants/reclamations/create', 'ReclamationsController@create');#p
 Route::post('/reclamations', 'ReclamationsController@store');#stockage d'une reclamation
 Route::get('/etudiants/releves/create', 'RelevesController@create');#page de etudiant pour faire une demande releve
 Route::post('/releves', 'RelevesController@store');#stockage reclamation
+Route::get('/etudiants/releves/etapes', 'RelevesController@etape');#
+Route::get('/etudiants/reclamations/etapes', 'ReclamationsController@etape');#
 
 ##Route des resources Controller Utilisateur
 Route::get('/utilisateurs', 'UtilisateursController@index');#acceuil utilisateur

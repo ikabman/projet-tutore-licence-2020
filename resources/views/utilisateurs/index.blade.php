@@ -136,7 +136,6 @@
                                 <th scope="col">Etudiant</th>
                                 <th scope="col">Date de dépôt</th>
                                 <th scope="col">Etat</th>
-                                <th scope="col">Etape</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -148,13 +147,10 @@
                                         <td>
                                             <span class="badge badge-pill badge-info">{{ $demande->etat }}</span>
                                         </td>
-                                        <td class="h5">
-                                            <span class="badge badge-dark">{{ $demande->libelle_etape }}</span>
-                                        </td>
                                     </tr>
                               @endforeach
                             </tbody>
-                          </table>
+                        </table>
                     </div>
                     <div class="card-footer text-muted">
                         <a href="#" class="btn btn-primary btn-md">Voir plus</a>

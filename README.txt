@@ -188,6 +188,16 @@ branch migrate
 
     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*--*-*-**-*-*-**-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     Modifications
+    -------------
+* model et migrations : maj avk le nouveau diagramme
+    -> create_demandes_table
+        .suppression de la cle etrangere etape_id
+    -> create_unite_enseignements_table
+        .ajout de la cle etrangere etape_id
+    -> create_releves_table
+        .ajout de la cle etrangere etape_id
+
+
 
 
 

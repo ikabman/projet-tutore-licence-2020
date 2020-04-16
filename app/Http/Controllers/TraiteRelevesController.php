@@ -31,7 +31,7 @@ class TraiteRelevesController extends Controller
             SELECT *
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND d.etudiant_id = e.id
             AND et.libelle = "Traité"
             AND et.type = "releve"

@@ -33,7 +33,7 @@ class TraiteReclamationsController extends Controller
         FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
         WHERE d.demandeable_id = r.id
         AND d.etudiant_id = e.id
-        AND d.etape_id = et.id
+        AND u.etape_id = et.id
         AND et.libelle = "Traité"
         AND et.type = "reclamation"
         AND u.reclamation_id = r.id

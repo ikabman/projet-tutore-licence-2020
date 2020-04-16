@@ -21,9 +21,15 @@ class CreateUniteEnseignementsTable extends Migration
             $table->string('note_reclame');
             $table->string('type_note');
             /*Cle etrangere reclamation*/
-            $table->foreignId('reclamation_id')
+            $table->integer('reclamation_id');
+            /*$table->foreignId('reclamation_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
+            /*Cle etrangere etape*/
+            $table->integer('etape_id');
+            /*$table->foreignId('etape_id')
+                ->constrained()
+                ->onDelete('cascade');*/
             $table->timestamps();
         });
     }

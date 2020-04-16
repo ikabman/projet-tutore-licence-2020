@@ -59,7 +59,7 @@ class UtilisateursController extends Controller
 
         #Le nbre de dmd de rel definitifs pr en ets donné
         $rel_def = DB::select('
-            SELECT COUNT(*)
+            SELECT *
             FROM releves r, demandes d, etudiants e
             WHERE r.type_releve = "definitif"
             AND r.id = d.demandeable_id
@@ -83,10 +83,9 @@ class UtilisateursController extends Controller
 
         #Selectionner les demandes pr un ets donné
         $demandes = DB::select('
-            SELECT d.id, d.date_depot, d.etat, e.name, e.first_name, et.libelle as libelle_etape
-            FROM demandes d, etudiants e, etapes et
-            WHERE d.etape_id = et.id
-            AND d.etudiant_id = e.id
+            SELECT d.id, d.date_depot, d.etat, e.name, e.first_name
+            FROM demandes d, etudiants e
+            WHERE d.etudiant_id = e.id
             AND e.etablissement_id ='.$utilisateur->etablissement_id.'
             LIMIT 3'
         );
@@ -96,67 +95,101 @@ class UtilisateursController extends Controller
             SELECT *
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND d.etudiant_id = e.id
             AND et.libelle = "Dépôt"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_depot = COUNT($Rel_depot);
-        $p_depot = 100 * ($nRel_depot/$nReleves);
+        if($nReleves > 0)
+        {
+            $p_depot = 100 * ($nRel_depot/$nReleves);
+        }
+        else
+        {
+            $p_depot = 0;
+        }
 
         $Rel_imprime = DB::select('
             SELECT *
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND d.etudiant_id = e.id
             AND et.libelle = "Imprimé"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_imprime = COUNT($Rel_imprime);
-        $p_imprime = 100 * ($nRel_imprime/$nReleves);
+        if($nReleves > 0)
+        {
+            $p_imprime = 100 * ($nRel_imprime/$nReleves);
+        }
+        else
+        {
+            $p_imprime = 0;
+        }
 
         $Rel_verification = DB::select('
             SELECT *
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND d.etudiant_id = e.id
             AND et.libelle = "Vérification"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_verification = COUNT($Rel_verification);
-        $p_verification = 100 * ($nRel_verification/$nReleves);
+        if($nReleves > 0)
+        {
+            $p_verification = 100 * ($nRel_verification/$nReleves);
+        }
+        else
+        {
+            $p_verification = 0;
+        }
 
         $Rel_signature = DB::select('
             SELECT *
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND d.etudiant_id = e.id
             AND et.libelle = "Signature"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_signature = COUNT($Rel_signature);
-        $p_signature = 100 * ($nRel_signature/$nReleves);
-
+        if($nReleves > 0)
+        {
+            $p_signature = 100 * ($nRel_signature/$nReleves);
+        }
+        else
+        {
+            $p_signature = 0;
+        }
 
         $Rel_traite = DB::select('
             SELECT *
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND d.etudiant_id = e.id
             AND et.libelle = "Traité"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_traite = COUNT($Rel_traite);
-        $p_traite = 100 * ($nRel_traite/$nReleves);
+        if($nReleves > 0)
+        {
+            $p_traite = 100 * ($nRel_traite/$nReleves);
+        }
+        else
+        {
+            $p_traite = 0;
+        }
 
         return view('utilisateurs.index', compact([
             'nEtudiants',

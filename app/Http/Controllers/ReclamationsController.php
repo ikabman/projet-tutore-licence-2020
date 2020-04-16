@@ -15,7 +15,7 @@ class ReclamationsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:etudiant')->only('create', 'store');
+        $this->middleware('auth:etudiant')->only('create', 'store', 'etape');
 
         $this->middleware('auth:utilisateur')->only('index');
     }
@@ -23,13 +23,30 @@ class ReclamationsController extends Controller
     ##Fonction qui s'occupe de valider les demandes de reclamation
     public function validatorReclamation(array $data)
     {
-        return Validator::make($data, [
-            'code' => 'required|string|max:255',
-            'libelle' => 'required|string|max:255',
-            'note_obtenue' => 'required|string|max:20',
-            'note_reclame' => 'required|string|max:20',
-            'type_note' => 'required|string|max:255',
-        ]);
+        $validator = false;
+        for($i = 1; $i <= $data['nombre']; $i++){
+            if($i == 1){
+                $validator = Validator::make($data, [
+                    'code' => 'required|string|max:255',
+                    'libelle' => 'required|string|max:255',
+                    'note_obtenue' => 'required|string',
+                    'note_reclame' => 'required|string|max:20',
+                    'type_note' => 'required|string|max:255',
+                ]);
+            }else{
+                $validator =  Validator::make($data, [
+                    'code'.$i => 'required|string|max:255',
+                    'libelle'.$i => 'required|string|max:255',
+                    'note_obtenue'.$i => 'required|string',
+                    'note_reclame'.$i => 'required|string|max:20',
+                    'type_note'.$i => 'required|string|max:255',
+                ]);
+            }
+            if(!$validator){
+                break;
+            }
+        }
+        return $validator;
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +63,7 @@ class ReclamationsController extends Controller
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND u.etape_id = et.id
             AND et.libelle = "Dépôt"
             AND et.type = "reclamation"
             AND u.reclamation_id = r.id
@@ -61,7 +78,7 @@ class ReclamationsController extends Controller
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND u.etape_id = et.id
             AND et.libelle = "Vérification"
             AND et.type = "reclamation"
             AND u.reclamation_id = r.id
@@ -75,7 +92,7 @@ class ReclamationsController extends Controller
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND u.etape_id = et.id
             AND et.libelle = "Traité"
             AND et.type = "reclamation"
             AND u.reclamation_id = r.id
@@ -91,54 +108,6 @@ class ReclamationsController extends Controller
         ]));
     }
 
-    /*public function data()
-    {
-        $utilisateur = Auth::user();
-        dd($utilisateur);
-
-        $depots = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
-            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
-            AND et.libelle = "Dépôt"
-            AND et.type = "reclamation"
-            AND u.reclamation_id = r.id
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
-
-        $verifications = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
-            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
-            AND et.libelle = "Vérification"
-            AND et.type = "reclamation"
-            AND u.reclamation_id = r.id
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
-
-        $traites = DB::select('
-        SELECT r.id, e.name, e.first_name, u.code, u.type_note
-        FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
-        WHERE d.demandeable_id = r.id
-        AND d.etudiant_id = e.id
-        AND d.etape_id = et.id
-        AND et.libelle = "Traité"
-        AND et.type = "reclamation"
-        AND u.reclamation_id = r.id
-        AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
-
-        return view('utilisateurs.admin-depot-reclam', compact([
-            'depots',
-            'verifications',
-            'traites',
-        ]));
-
-    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -159,18 +128,34 @@ class ReclamationsController extends Controller
     {
         $etudiant = Auth::user();
 
-        $this->validatorReclamation($request->all())->validate();
+        $donnees = $request->all();
+
+        $this->validatorReclamation($donnees)->validate();
         #Creation de la reclamation
         $dr = Reclamation::create([]);
 
         #Creation de l'unite d'enseignement
-        $dr->unite_enseignement()->create([
-            'code' => $request->code,
-            'libelle' => $request->libelle,
-            'note_obtenue' => $request->note_obtenue,
-            'note_reclame' => $request->note_reclame,
-            'type_note' => $request->type_note,
-        ]);
+        for($i = 1; $i <= $donnees['nombre']; $i++){
+            if($i == 1){
+                $dr->unite_enseignement()->create([
+                    'code' => $donnees['code'],
+                    'libelle' => $donnees['libelle'],
+                    'note_obtenue' => $donnees['note_obtenue'],
+                    'note_reclame' => $donnees['note_reclame'],
+                    'type_note' => $donnees['type_note'],
+                    'etape_id' => 1
+                ]);
+            }else{
+                $dr->unite_enseignement()->create([
+                    'code' => $donnees['code'.$i],
+                    'libelle' => $donnees['libelle'.$i],
+                    'note_obtenue' => $donnees['note_obtenue'.$i],
+                    'note_reclame' => $donnees['note_reclame'.$i],
+                    'type_note' => $donnees['type_note'.$i],
+                    'etape_id' => 1
+                ]);
+            }
+        }
 
         #Creation de la demande
         $dr->demande()->create([
@@ -178,15 +163,30 @@ class ReclamationsController extends Controller
             'date_depot' => date('Y-m-d H:i:s'),
             'etat' => 'En cours',
             'etudiant_id' => $etudiant->id,
-            'etape_id' => 6,
+            'montant' => 2000 * $donnees['nombre'],
         ]);
 
         ##Doit declencher le middleware de payement et apres retour vers ?? apres retouner sur l'acceuil avec un message lui disant que la demande a été enregistré
         ##Le retour doit se faire sur une page avec le layout avk un msg "Votre demande de reclamation a ete bien enregistre"
         ##On fait un return back pour l'instant after on decidera quoi faire
-        return back();
+        return redirect('/etudiants/reclamations/etapes');
     }
 
+    public function etape()
+    {
+        $id = Auth::id();
+
+        //Selection des ues en cours de traitment pour l'étudiant
+        $ues = DB::select('SELECT ue.code, ue.libelle, ue.etape_id'
+                             .' FROM unite_enseignements ue, reclamations r, demandes d'
+                             .' WHERE r.id = d.demandeable_id'
+                             .' AND d.montant >= 2000'
+                             .' AND d.etat = \'En cours\''
+                             .' AND ue.reclamation_id = r.id'
+                             .' AND d.etudiant_id = '.$id);
+
+        return view('etudiants.etu-reclamation-etape', ['ues' => $ues]);
+    }
     /**
      * Display the specified resource.
      *

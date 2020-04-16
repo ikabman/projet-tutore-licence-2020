@@ -18,6 +18,10 @@ class CreateRelevesTable extends Migration
             $table->date('date_retrait')->nullable();
             $table->string('annee_du_releve');
             $table->string('type_releve');
+            $table->integer('etape_id');
+            /*$table->foreignId('etudiant_id')
+                ->constrained()
+                ->onDelete('cascade');*/
             $table->timestamps();
         });
     }

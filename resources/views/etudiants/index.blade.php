@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="bootstrap.min.css"/>
+<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css"/>
 <meta charset="utf-8"/>
 
 @extends('layouts.layout-etudiant')
@@ -56,7 +56,7 @@
             <!-- ligne des boutons de demandes -->
             <div class="row my-4">
                 <div class="col-lg-6 ">
-                    <a href="/etudiants/releves/create" class="card bg-gradient-primary text-white shadow float-right text-uppercase">
+                    <a href="/etudiants/releves/create" class="card bg-gradient-primary text-white shadow float-right text-uppercase text-decoration-none">
                         <div class="card-body">
                             Demande de relevé
                         </div>
@@ -65,7 +65,7 @@
                 <div class="col-lg-6 ">
                     <button href="#" class="card bg-success text-white shadow">
                         <div class="card-body">
-                            <a href="/etudiants/reclamations/create" class="text-white text-uppercase">Reclamations de notes</a>
+                            <a href="/etudiants/reclamations/create" class="text-white text-uppercase text-decoration-none">Reclamations de notes</a>
                         </div>
                     </button>
                 </div>

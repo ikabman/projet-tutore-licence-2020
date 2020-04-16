@@ -15,7 +15,7 @@ class RelevesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:etudiant')->only('create', 'store');
+        $this->middleware('auth:etudiant')->only('create', 'store', 'etape');
 
         $this->middleware('auth:utilisateur')->only('index');
     }
@@ -37,13 +37,13 @@ class RelevesController extends Controller
     public function index()
     {
         $utilisateur = Auth::user();
-        
+
         $Rel_depots = DB::select('
             SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND et.libelle = "Dépôt"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
@@ -56,7 +56,7 @@ class RelevesController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND et.libelle = "Imprimé"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
@@ -69,7 +69,7 @@ class RelevesController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND et.libelle = "Vérification"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
@@ -82,7 +82,7 @@ class RelevesController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND et.libelle = "Signature"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
@@ -95,7 +95,7 @@ class RelevesController extends Controller
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
+            AND r.etape_id = et.id
             AND et.libelle = "Traité"
             AND et.type = "releve"
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
@@ -125,7 +125,20 @@ class RelevesController extends Controller
      */
     public function create()
     {
-        return view('etudiants.etu-releve-note');
+        /**
+        *Si l'etudiant a une demande en cours,
+        *le bouton valider du formulaire est désactivé.
+        */
+        $id = Auth::id();
+
+        $etat = DB::select('SELECT d.etat'
+                             .' FROM demandes d'
+                             .' WHERE d.etudiant_id = '.$id);
+        if(isset($etat[0])){
+            $etat = $etat[0];
+        }
+
+        return view('etudiants.etu-releve-note', ["etat" => $etat]);
     }
 
     /**
@@ -139,9 +152,19 @@ class RelevesController extends Controller
         $etudiant = Auth::user();
 
         $this->validatorReleve($request->all())->validate();
+
+        ///Les relevés définitifs sont gratuit donc seront à l'étape dépôt directement
+        $etape_id = 1;
+        $montant = 500;
+        if($request->type_releve ==  "definitif"){
+            $etape_id = 3;
+            $montant = 0;
+        }
+
         $dr = Releve::create([
                 'annee_du_releve' => $request->annee_du_releve,
                 'type_releve' => $request->type_releve,
+                'etape_id' => $etape_id,
             ]);
 
         ##creation de la demande
@@ -151,15 +174,33 @@ class RelevesController extends Controller
             'etat' => 'En cours',
             'etudiant_id' => $etudiant->id,
             'etape_id' => 1,
+            'montant' => $montant,
         ]);
 
         ##Doit declencher le middleware de payement et apres retour vers ?? apres retouner sur l'acceuil avec un message lui disant que la demande a été enregistré
         ##Le retour doit se faire sur une page avec le layout avk un msg "Votre demande de releve a ete bien enregistre"
         ##On fait un return back pour l'instant after on decidera quoi faire
 
-        return back();
+        return redirect('/etudiants/releves/etapes');
     }
 
+    public function etape()
+    {
+        $id = Auth::id();
+
+        //Selection de la demande de relevé en cours pour l'étudiant
+        $releve = DB::select('SELECT r.type_releve, r.annee_du_releve, r.etape_id'
+                             .' FROM releves r, demandes d'
+                             .' WHERE r.id = d.demandeable_id'
+                             .' AND d.montant BETWEEN 0 AND 500'
+                             .' AND d.etat = \'En cours\''
+                             .' AND d.etudiant_id = '.$id);
+        if(isset($releve[0])){
+            $releve = $releve[0];
+        }
+
+        return view('etudiants.etu-releve-etape', ['releve' => $releve]);
+    }
     /**
      * Display the specified resource.
      *

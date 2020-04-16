@@ -57,7 +57,7 @@
       <hr class="sidebar-divider">
 
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/etudiants/releves/etapes">
           <i class="fa fa-exclamation-circle"></i>
           <span>Relevés</span></a>
       </li>
@@ -65,7 +65,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/etudiants/reclamations/etapes">
           <i class="fas fa-shekel-sign"></i>
           <span>Reclamations</span></a>
       </li>
@@ -223,7 +223,7 @@
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
+  <a class="scroll-to-top rounded-circle py-2" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
@@ -255,6 +255,8 @@
   <!-- Custom scripts for all pages-->
   <script src="/js/sb-admin-2.js"></script>
 
+  <!--Script pour les réclamations multiples-->
+  <script src="/js/multiple_reclamations.js"></script>
 </body>
 
 </html>

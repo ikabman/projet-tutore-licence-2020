@@ -20,13 +20,13 @@ class CreateDemandesTable extends Migration
             $table->date('date_depot');
             $table->string('etat');
             /*Etudiant foreign Key*/
-            $table->foreignId('etudiant_id')
+            $table->integer('etudiant_id');
+            /*$table->foreignId('etudiant_id')
                 ->constrained()
-                ->onDelete('cascade');
-            /*Etape foreign Key*/
-            $table->foreignId('etape_id')
-                ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
+            $table->integer('montant');
+            $table->boolean('payement')->default(0);
+            $table->boolean('confirmation')->default(0);
             $table->timestamps();
         });
     }
