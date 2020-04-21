@@ -207,6 +207,31 @@ class UtilisateursController extends Controller
     }
 
     /**
+    *Fonction utilisée pour le passage des demandes
+    *d'une étape à une autre
+    */
+    public function passage(Request $request)
+    {
+        $data = $request->all();
+
+        if($data['type'] == 'ue'){
+            if($data['etape'] < 12){//8 pour chakir
+                DB::table('unite_enseignements')
+                ->where('id', $data['id'])
+                ->update(['etape_id' => ($data['etape']+1)]);
+            }
+        }else if($data['etape'] == 'releve'){
+            if($data['type'] < 7){//5 pour chakir
+                DB::table('releves')
+                ->where('id', $data['id'])
+                ->update(['etape_id' => ($data['etape']+1)]);
+            }
+        }
+
+        return response()->json(["status" => "ok"]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

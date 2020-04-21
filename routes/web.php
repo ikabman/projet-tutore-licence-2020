@@ -55,9 +55,5 @@ Route::get('/utilisateurs/releves/verifications', 'VerificationRelevesController
 Route::get('/utilisateurs/releves/signatures', 'SignatureRelevesController@index');# page index des releves a l'etape Signature
 Route::get('/utilisateurs/releves/traites', 'TraiteRelevesController@index');# page index des releves a l'etape Traite
 
-
-
-
-
-
-
+##Action administrateur
+Route::post('/utilisateurs/actions', 'UtilisateursController@passage');

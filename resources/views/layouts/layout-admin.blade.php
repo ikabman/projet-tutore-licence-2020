@@ -9,6 +9,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <!--
+  Important pour les requêtes ajax avec Laravel
+  -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <title>Relevés & Reclamations</title>
 
   <!-- Custom fonts for this template-->
@@ -211,6 +216,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/js/sb-admin-2.js"></script>
+  <script src="/js/actions_administrateurs.js"></script>
 
 </body>
 
