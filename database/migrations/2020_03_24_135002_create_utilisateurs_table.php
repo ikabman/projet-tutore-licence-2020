@@ -22,14 +22,16 @@ class CreateUtilisateursTable extends Migration
             $table->string('login');
             $table->string('phone');
             $table->string('password');
-            /*Cle etrangere etablissement*/
+            $table->unsignedInteger('etablissement_id');
+            $table->unsignedInteger('role_id');
+            /*Cle etrangere etablissement
             $table->foreignId('etablissement_id')
                 ->constrained()
                 ->onDelete('cascade');
-            /*Cle etrangere role*/
+            /*Cle etrangere role
             $table->foreignId('role_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
             $table->rememberToken();
             $table->timestamps();
         });

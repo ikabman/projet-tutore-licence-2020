@@ -23,14 +23,16 @@ class CreateEtudiantsTable extends Migration
             $table->string('phone');
             $table->string('password');
             $table->integer('numero_carte');
-            /*Cle etrangere etablissement*/
+            $table->integer('etablissement_id');
+            $table->integer('option_id');
+            /*Cle etrangere etablissement
             $table->foreignId('etablissement_id')
                 ->constrained()
                 ->onDelete('cascade');
-            /*Cle etrangere option*/
+            /*Cle etrangere option
             $table->foreignId('option_id')
                 ->constrained()
-                ->onDelete('cascade');
+                ->onDelete('cascade');*/
             $table->rememberToken();
             $table->timestamps();
         });

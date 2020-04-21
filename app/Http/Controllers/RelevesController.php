@@ -173,7 +173,6 @@ class RelevesController extends Controller
             'date_depot' => date('Y-m-d H:i:s'),
             'etat' => 'En cours',
             'etudiant_id' => $etudiant->id,
-            'etape_id' => 1,
             'montant' => $montant,
         ]);
 
