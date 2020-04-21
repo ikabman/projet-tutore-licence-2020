@@ -29,12 +29,11 @@ class DepotReclamationsController extends Controller
         $utilisateur = Auth::user();
 
         $Rec_depots = DB::select('
-            SELECT e.name, e.first_name, u.code, u.type_note, u.id, u.etape_id
+            SELECT DISTINCT e.name, e.first_name, u.code, u.type_note, u.id, u.etape_id
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND u.etape_id = 8
-            AND d.montant >= 2000
+            AND u.etape_id = 10
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );

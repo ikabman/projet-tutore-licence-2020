@@ -59,13 +59,11 @@ class ReclamationsController extends Controller
 
         #Selectionner les demandes pr un ets donné
         $Rec_depots = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND u.etape_id = et.id
-            AND et.libelle = "Dépôt"
-            AND et.type = "reclamation"
+            AND u.etape_id = 10
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
@@ -74,13 +72,11 @@ class ReclamationsController extends Controller
 
 
         $Rec_verifications = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND u.etape_id = et.id
-            AND et.libelle = "Vérification"
-            AND et.type = "reclamation"
+            AND u.etape_id = 11
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
@@ -88,13 +84,11 @@ class ReclamationsController extends Controller
         $nRec_verifications = count($Rec_verifications);
 
         $Rec_traites = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND u.etape_id = et.id
-            AND et.libelle = "Traité"
-            AND et.type = "reclamation"
+            AND u.etape_id = 12
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
@@ -177,10 +171,9 @@ class ReclamationsController extends Controller
         $id = Auth::id();
 
         //Selection des ues en cours de traitment pour l'étudiant
-        $ues = DB::select('SELECT ue.code, ue.libelle, ue.etape_id'
+        $ues = DB::select('SELECT DISTINCT ue.code, ue.libelle, ue.etape_id'
                              .' FROM unite_enseignements ue, reclamations r, demandes d'
                              .' WHERE r.id = d.demandeable_id'
-                             .' AND d.montant >= 2000'
                              .' AND d.etat = \'En cours\''
                              .' AND ue.reclamation_id = r.id'
                              .' AND d.etudiant_id = '.$id);

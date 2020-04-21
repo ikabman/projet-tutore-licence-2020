@@ -35,6 +35,7 @@ class DepotRelevesController extends Controller
             AND d.etudiant_id = e.id
             AND et.libelle = "Dépôt"
             AND et.type = "releve"
+            AND d.montant BETWEEN 0 AND 500
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_depots = COUNT($Rel_depots);

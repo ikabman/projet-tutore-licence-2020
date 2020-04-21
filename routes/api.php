@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/informations', 'PayementTestApi@getInformations');
+Route::post('/payement', 'PayementTestApi@setPayementEffectue');
+Route::post('/confirmation', 'PayementTestApi@setConfirmationPayement');

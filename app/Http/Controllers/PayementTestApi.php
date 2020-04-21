@@ -13,7 +13,7 @@ class PayementTestApi extends Controller implements Payement
         $parametres = $request->all();
         $identifiantPayement = $parametres['identifiant_payement'];
 
-        $donnees = DB::select('SELECT e.nom, e.prenom AS prénom, e.numero_de_carte as \'numero de carte\', et.libelle AS etablissement, o.libelle, d.montant '
+        $donnees = DB::select('SELECT e.name AS Nom, e.first_name AS Prénom, e.numero_carte as \'Numero de carte\', et.libelle AS Etablissement, o.libelle AS Libelle, d.montant AS Montant '
                              .'FROM etudiants e, etablissements et, options o, demandes d '
                              .'WHERE e.id = d.demandeable_id '
                              .'AND e.option_id = o.id '
@@ -65,7 +65,7 @@ class PayementTestApi extends Controller implements Payement
              $reclamation_id = $reclamation_id[0]->id;
              DB::table('unite_enseignements')
                  ->where('reclamation_id', $reclamation_id)
-                 ->update(['etape_id' => 3]);
+                 ->update(['etape_id' => 10]);
         }
 
         $releve_id =  DB::select('SELECT d.demandeable_id'

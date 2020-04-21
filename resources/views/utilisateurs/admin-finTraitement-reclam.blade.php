@@ -14,16 +14,22 @@
                 <!-- Sort box -->
                 <div class="col-lg-4">
                     <form class="form-inline">
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                          <option selected>Actions groupés</option>
-                          <option value="1">Etape suivante</option>
-                          <option value="2">action</option>
-                          <option value="3">other action</option>
+                        <select class="custom-select my-1 mr-sm-2 action_admin_selection" id="inlineFormCustomSelectPref">
+                            <option>Action unique</option>
+                            <option>Action groupée</option>
                         </select>
                     </form>
                 </div>
+                <!--Action groupéé button-->
+                <div class="col-lg-3">
+                    <button type="button" class="btn btn-success btn-md float-md-right text-white text-bold passer_etape_groupe_btn"
+                    style="display:none">
+                        Passer l'etape
+                        <i class="fas fa-angle-double-right"></i>
+                    </button>
+                </div>
                 <!-- Search-box -->
-                <div class="col-lg-4 offset-lg-4 col-lg-4">
+                <div class="col-lg-4 offset-lg-1">
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                           <input type="text" class="form-control bg-light border-0 small" placeholder="Faire une recherche..." aria-label="Search" aria-describedby="basic-addon2">
@@ -36,30 +42,30 @@
                     </form>
                 </div>
             </div>
-            <div class="table-responsive container">
-                <table class="table table-striped border-left-success " id="tableDemandes" width="100%" cellspacing="0">
+            <div class="table-responsive">
+                <table class="table table-striped table-sm border-left-success " id="tableDemandes" width="100%" cellspacing="0">
                     @if($nRec_traites > 0)
                         <!--titres du tableau -->
-                        <thead class="thead-warning">
+                        <thead class="thead-success">
                             <tr>
-                                <th scope="col" style="width: 1em;">#</th>
+                                <!--<th scope="col" style="width: 1em;">#</th>-->
                                 <th scope="col">Nom</th>
                                 <th scope="col">Prenom</th>
                                 <th scope="col">Code Ue</th>
                                 <th scope="col">Evaluation</th>
-                                <th scope="col"> </th>
+                                <!--<th scope="col"> </th>-->
                             </tr>
                         </thead>
                         <!-- Contenu du tableau -->
                         <tbody>
                             @foreach($Rec_traites as $rec)
-                            <tr>
-                                <td>
+                            <tr id="{{$rec->id}}">
+                                <!--<td>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
                                         <label class="custom-control-label" for="customCheck1"></label>
                                     </div>
-                                </td>
+                                </td>-->
                                 <td>{{$rec->name}}</td>
                                 <td>{{$rec->first_name}}</td>
                                 <td>
@@ -71,8 +77,14 @@
                                     </ul>
                                 </td>
                                 <td>{{$rec->type_note}}</td>
-                                <td >
-                                    <button type="button" class="btn btn-warning btn-sm float-md-right text-white text-bold">Passer l'etape <i class="fas fa-angle-double-right"></i></button>
+                                <td>
+                                    <input type="checkbox" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
+                                </td>
+                                <td>
+                                    <button type="button" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="btn btn-success btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
+                                        Passer l'etape
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -105,4 +117,3 @@
     </div>
 </div>
 @endsection
-

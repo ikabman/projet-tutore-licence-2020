@@ -30,37 +30,31 @@ class EtapeReclamationController extends Controller
         $utilisateur = Auth::user();
 
         $Rec_depots = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
-            AND et.libelle = "Dépôt"
-            AND et.type = "reclamation"
+            AND d.etape_id = 10
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
 
         $Rec_verifications = DB::select('
-            SELECT r.id, e.name, e.first_name, u.code, u.type_note
+            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = et.id
-            AND et.libelle = "Vérification"
-            AND et.type = "reclamation"
+            AND d.etape_id = 11
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
 
         $Rec_traites = DB::select('
-        SELECT r.id, e.name, e.first_name, u.code, u.type_note
+        SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
         FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
         WHERE d.demandeable_id = r.id
         AND d.etudiant_id = e.id
-        AND d.etape_id = et.id
-        AND et.libelle = "Traité"
-        AND et.type = "reclamation"
+        AND d.etape_id = 12
         AND u.reclamation_id = r.id
         AND e.etablissement_id = '.$utilisateur->etablissement->id
         );

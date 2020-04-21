@@ -11,9 +11,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         @if($etat)
-                        <p class="text-danger h5 my-3" >
-                            Vous avez déjà une demande en cours!
-                        </p>
+                        <p class="text-danger text-center h5 my-3">Vous avez déjà une demande en cours!</p>
                         @else
                         <p class="text-black h5 my-3" >
                             Veuillez saisir les informations nécessaire à la reclamation de note dans le formulaire ci-dessous!

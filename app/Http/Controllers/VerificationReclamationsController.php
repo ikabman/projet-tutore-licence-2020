@@ -29,13 +29,11 @@ class VerificationReclamationsController extends Controller
         $utilisateur = Auth::user();
 
         $Rec_verifications = DB::select('
-            SELECT e.name, e.first_name, u.code, u.type_note
+            SELECT DISTINCT e.name, e.first_name, u.code, u.type_note, u.id, u.etape_id
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND u.etape_id = et.id
-            AND et.libelle = "Vérification"
-            AND et.type = "reclamation"
+            AND u.etape_id = 11
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
