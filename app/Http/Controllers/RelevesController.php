@@ -39,65 +39,55 @@ class RelevesController extends Controller
         $utilisateur = Auth::user();
 
         $Rel_depots = DB::select('
-            SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND r.etape_id = et.id
-            AND et.libelle = "Dépôt"
-            AND et.type = "releve"
+            AND r.etape_id = 3
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
         );
         $nRel_depots = count($Rel_depots);
 
         $Rel_impressions = DB::select('
-            SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND r.etape_id = et.id
-            AND et.libelle = "Imprimé"
-            AND et.type = "releve"
+            AND r.etape_id = 4
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
         );
         $nRel_impressions = count($Rel_impressions);
 
         $Rel_verifications = DB::select('
-            SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND r.etape_id = et.id
-            AND et.libelle = "Vérification"
-            AND et.type = "releve"
+            AND r.etape_id = 5
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
         );
         $nRel_verifications = count($Rel_verifications);
 
         $Rel_signatures = DB::select('
-            SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND r.etape_id = et.id
-            AND et.libelle = "Signature"
-            AND et.type = "releve"
+            AND r.etape_id = 6
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
         );
         $nRel_signatures = count($Rel_signatures);
 
         $Rel_traites = DB::select('
-            SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND r.etape_id = et.id
-            AND et.libelle = "Traité"
-            AND et.type = "releve"
+            AND r.etape_id = 7
             AND e.etablissement_id = '.$utilisateur->etablissement->id.'
             LIMIT 5'
         );

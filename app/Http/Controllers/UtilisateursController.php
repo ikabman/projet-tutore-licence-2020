@@ -220,8 +220,8 @@ class UtilisateursController extends Controller
                 ->where('id', $data['id'])
                 ->update(['etape_id' => ($data['etape']+1)]);
             }
-        }else if($data['etape'] == 'releve'){
-            if($data['type'] < 7){//5 pour chakir
+        }else if($data['type'] == 'releve'){
+            if($data['etape'] < 7){//5 pour chakir
                 DB::table('releves')
                 ->where('id', $data['id'])
                 ->update(['etape_id' => ($data['etape']+1)]);

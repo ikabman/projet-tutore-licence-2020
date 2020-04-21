@@ -28,14 +28,11 @@ class DepotRelevesController extends Controller
         $utilisateur = Auth::user();
 
         $Rel_depots = DB::select('
-            SELECT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve, r.etape_id
             FROM releves r, demandes d, etudiants e, etapes et
             WHERE d.demandeable_id = r.id
-            AND r.etape_id = et.id
+            AND r.etape_id = 3
             AND d.etudiant_id = e.id
-            AND et.libelle = "Dépôt"
-            AND et.type = "releve"
-            AND d.montant BETWEEN 0 AND 500
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
         $nRel_depots = COUNT($Rel_depots);

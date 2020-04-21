@@ -14,16 +14,22 @@
                 <!-- Sort box -->
                 <div class="col-lg-4">
                     <form class="form-inline">
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                          <option selected>Actions groupés</option>
-                          <option value="1">Etape suivante</option>
-                          <option value="2">action</option>
-                          <option value="3">other action</option>
+                        <select class="custom-select my-1 mr-sm-2 action_admin_selection" id="inlineFormCustomSelectPref">
+                            <option>Action unique</option>
+                            <option>Action groupée</option>
                         </select>
                     </form>
                 </div>
+                <!--Action groupéé button-->
+                <div class="col-lg-3">
+                    <button type="button" class="btn btn-warning btn-md float-md-right text-white text-bold passer_etape_groupe_btn"
+                    style="display:none">
+                        Passer l'etape
+                        <i class="fas fa-angle-double-right"></i>
+                    </button>
+                </div>
                 <!-- Search-box -->
-                <div class="col-lg-4 offset-lg-4 col-lg-4">
+                <div class="col-lg-4 offset-lg-1">
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                           <input type="text" class="form-control bg-light border-0 small" placeholder="Faire une recherche..." aria-label="Search" aria-describedby="basic-addon2">
@@ -36,45 +42,55 @@
                     </form>
                 </div>
             </div>
-            <div class="table-responsive container">
-                <table class="table table-striped border-left-warning " id="tableDemandes" width="100%" cellspacing="0">
-                    @if($nRel_depots > 0)
-                        <!--titres du tableau -->
-                        <thead class="thead-warning">
-                            <tr>
-                                <th scope="col" style="width: 1em;">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Prenom</th>
-                                <th scope="col">Année du relevé</th>
-                                <th scope="col">Type de relevé</th>
-                                <th scope="col"> </th>
-                            </tr>
-                        </thead>
-
-                        <!-- Contenu du tableau -->
-                        <tbody>
-                            @foreach ($Rel_depots as $rel)
+            <br/>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped border-left-warning " id="tableDemandes" width="100%" cellspacing="0">
+                        @if($nRel_depots > 0)
+                            <!--titres du tableau -->
+                            <thead class="thead-warning">
                                 <tr>
-                                    <td>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck{{$rel->id}}">
-                                            <label class="custom-control-label" for="customCheck{{$rel->id}}"></label>
-                                        </div>
-                                    </td>
-                                    <td>{{$rel->name}}</td>
-                                    <td>{{$rel->first_name}}</td>
-                                    <td>{{$rel->annee_du_releve}}</td>
-                                    <td>{{$rel->type_releve}}</td>
-                                    <td >
-                                        <button type="button" class="btn btn-warning btn-sm float-md-right text-white text-bold">Passer l'etape <i class="fas fa-angle-double-right"></i></button>
-                                    </td>
+                                    <!--<th scope="col" style="width: 1em;">#</th>-->
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prenom</th>
+                                    <th scope="col">Année du relevé</th>
+                                    <th scope="col">Type de relevé</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    @else
-                        @include('includes.empty')
-                    @endif
-                </table>
+                            </thead>
+
+                            <!-- Contenu du tableau -->
+                            <tbody>
+                                @foreach ($Rel_depots as $rel)
+                                    <tr id="{{$rel->id}}">
+                                        <!--<td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck{{$rel->id}}">
+                                                <label class="custom-control-label" for="customCheck{{$rel->id}}"></label>
+                                            </div>
+                                        </td>-->
+                                        <td>{{$rel->name}}</td>
+                                        <td>{{$rel->first_name}}</td>
+                                        <td>{{$rel->annee_du_releve}}</td>
+                                        <td>{{$rel->type_releve}}</td>
+                                        <td>
+                                            <input type="checkbox" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
+                                        </td>
+                                        <td>
+                                            <button type="button" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="btn btn-warning btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
+                                                Passer l'etape
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            @include('includes.empty')
+                        @endif
+                    </table>
+                </div>
             </div>
             <div class="row pagin-row float-right ">
                 <div class="col-lg-12">
@@ -99,4 +115,3 @@
     </div>
 </div>
 @endsection
-

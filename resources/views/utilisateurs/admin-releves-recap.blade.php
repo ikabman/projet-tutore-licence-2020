@@ -27,7 +27,7 @@
                         <button type="button" class="btn btn-warning btn-sm btn-block ">
                             <i class="fas fa-file-invoice icon-etape-style"></i>
                             <span class="etape-button-style">
-                                <a href="#" class="text-white">DEPOTS</a>
+                                <a href="/utilisateurs/releves/depots" class="text-white">DEPOTS</a>
                             </span>
                             @if($nRel_depots > 0)
                                 <span class="badge badge-light">{{$nRel_depots}}</span>
@@ -70,7 +70,7 @@
                         <button type="button" class="btn btn-primary btn-sm btn-block ">
                             <i class="fas fa-print icon-etape-style"></i>
                             <span class="etape-button-style">
-                                <a href="#" class="text-white">IMPRESSIONS</a>
+                                <a href="/utilisateurs/releves/impressions" class="text-white">IMPRESSIONS</a>
                             </span>
                             @if($nRel_impressions > 0)
                                 <span class="badge badge-light">{{$nRel_impressions}}</span>
@@ -115,7 +115,7 @@
                         <button type="button" class="btn btn-danger btn-sm btn-block ">
                             <i class="far fa-eye icon-etape-style"></i>
                             <span class="etape-button-style">
-                                <a href="#" class="text-white">VERIFICATIONS</a>
+                                <a href="/utilisateurs/releves/verifications" class="text-white">VERIFICATIONS</a>
                             </span>
                             @if($nRel_verifications > 0)
                                 <span class="badge badge-light">{{$nRel_verifications}}</span>
@@ -158,7 +158,7 @@
                         <button type="button" class="btn btn-info btn-sm btn-block ">
                             <i class="fas fa-signature icon-etape-style"></i>
                             <span class="etape-button-style">
-                                <a href="#" class="text-white"> SIGNATURE</a>
+                                <a href="/utilisateurs/releves/signatures" class="text-white"> SIGNATURE</a>
                             </span>
                             @if($nRel_signatures > 0)
                                 <span class="badge badge-light">{{$nRel_signatures}}</span>
@@ -203,7 +203,7 @@
                         <button type="button" class="btn btn-success btn-sm btn-block ">
                             <i class="far fa-thumbs-up icon-etape-style"></i>
                             <span class="etape-button-style">
-                                <a href="#" class="text-white"> FIN TRAITEMENT</a>
+                                <a href="/utilisateurs/releves/traites" class="text-white"> FIN TRAITEMENT</a>
                             </span>
                             @if($nRel_traites > 0)
                                 <span class="badge badge-light">{{$nRel_traites}}</span>
@@ -244,7 +244,3 @@
         </div>
     </div>
 @endsection
-
-
-
-

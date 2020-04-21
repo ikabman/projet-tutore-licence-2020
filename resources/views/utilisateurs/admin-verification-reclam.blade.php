@@ -53,6 +53,8 @@
                                 <th scope="col">Prenom</th>
                                 <th scope="col">Code Ue</th>
                                 <th scope="col">Evaluation</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <!-- Contenu du tableau -->
