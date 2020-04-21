@@ -10,9 +10,15 @@
             <div class="offset-lg-3 col-lg-6">
                 <div class="card shadow mb-4">
                     <div class="card-body">
+                        @if($etat)
+                        <p class="text-danger h5 my-3" >
+                            Vous avez déjà une demande en cours!
+                        </p>
+                        @else
                         <p class="text-black h5 my-3" >
                             Veuillez saisir les informations nécessaire à la reclamation de note dans le formulaire ci-dessous!
                         </p>
+                        @endif
                         <form action="/releves" method="POST" class="reclam-form">
                             @csrf
                             <div class="form-row my-4">
@@ -47,7 +53,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success my-2 float-lg-right " >Valider</button>
+                            <button type="submit" class="btn btn-success my-2 float-lg-right" @if($etat) disabled  @endif>Valider</button>
                         </form>
                     </div>
                 </div>

@@ -143,7 +143,7 @@ class ReclamationsController extends Controller
                     'note_obtenue' => $donnees['note_obtenue'],
                     'note_reclame' => $donnees['note_reclame'],
                     'type_note' => $donnees['type_note'],
-                    'etape_id' => 1
+                    'etape_id' => 8
                 ]);
             }else{
                 $dr->unite_enseignement()->create([
@@ -152,7 +152,7 @@ class ReclamationsController extends Controller
                     'note_obtenue' => $donnees['note_obtenue'.$i],
                     'note_reclame' => $donnees['note_reclame'.$i],
                     'type_note' => $donnees['type_note'.$i],
-                    'etape_id' => 1
+                    'etape_id' => 8
                 ]);
             }
         }

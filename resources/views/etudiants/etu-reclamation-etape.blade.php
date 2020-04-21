@@ -12,19 +12,19 @@
             </div>
             <div class="container my-5 text-center">
                 <ul id="progressbar">
-                    <li class="@if($ue->etape_id >= 1) active @endif" id="step1">
+                    <li class="@if($ue->etape_id >= 8) active @endif" id="step1">
                         <div class="d-none d-md-block">Demande</div>
                     </li>
-            	       <li class="@if($ue->etape_id >= 2) active @endif" id="step2">
+            	       <li class="@if($ue->etape_id >= 9) active @endif" id="step2">
                         <div class="d-none d-md-block">Payement</div>
                     </li>
-            	    <li class="@if($ue->etape_id >= 3) active @endif" id="step3">
+            	    <li class="@if($ue->etape_id >= 10) active @endif" id="step3">
                         <div class="d-none d-md-block">Dépôt</div>
                     </li>
-                    <li class="@if($ue->etape_id >= 4) active @endif" id="step4">
+                    <li class="@if($ue->etape_id >= 11) active @endif" id="step4">
                         <div class="d-none d-md-block">Vérification</div>
                     </li>
-                    <li class="@if($ue->etape_id >= 5) active @endif" id="step5">
+                    <li class="@if($ue->etape_id >= 12) active @endif" id="step5">
                         <div class="d-none d-md-block">Fin traitement</div>
                     </li>
                 </ul>

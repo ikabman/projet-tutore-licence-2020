@@ -156,15 +156,19 @@ class RelevesController extends Controller
         ///Les relevés définitifs sont gratuit donc seront à l'étape dépôt directement
         $etape_id = 1;
         $montant = 500;
+        $payement = 0;
+        $confirmation = 0;
         if($request->type_releve ==  "definitif"){
             $etape_id = 3;
             $montant = 0;
+            $payement = 1;
+            $confirmation = 1;
         }
 
         $dr = Releve::create([
                 'annee_du_releve' => $request->annee_du_releve,
                 'type_releve' => $request->type_releve,
-                'etape_id' => $etape_id,
+                'etape_id' => $etape_id
             ]);
 
         ##creation de la demande
@@ -174,6 +178,8 @@ class RelevesController extends Controller
             'etat' => 'En cours',
             'etudiant_id' => $etudiant->id,
             'montant' => $montant,
+            'payement' => $payement,
+            'confirmation' => $confirmation
         ]);
 
         ##Doit declencher le middleware de payement et apres retour vers ?? apres retouner sur l'acceuil avec un message lui disant que la demande a été enregistré
