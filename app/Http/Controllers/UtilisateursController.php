@@ -18,6 +18,28 @@ class UtilisateursController extends Controller
     }
 
     /**
+    *Cette fonction renvoie les relevés à une étape donnée
+    *Elle est utile pour le pourcentage sur la page index de l'administrateur
+    *Elle a été crée dans un soucis de factorisation des requêtes
+    */
+    public function releveEtape($etape){
+        $utilisateur = Auth::user();
+
+        $releves = DB::select('
+            SELECT DISTINCT r.id
+            FROM releves r, demandes d, etudiants e, etapes et
+            WHERE d.demandeable_id = r.id
+            AND r.etape_id = et.id
+            AND d.etudiant_id = e.id
+            AND et.libelle = "'.$etape.'"
+            AND et.type = "releve"
+            AND e.etablissement_id = '.$utilisateur->etablissement->id
+        );
+
+        return $releves;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -37,9 +59,10 @@ class UtilisateursController extends Controller
 
         #Le nbre de demandes de reclamation pour un etablissement donné
         $reclamations = DB::select('
-            SELECT *
-            FROM reclamations r, demandes d, etudiants e
+            SELECT DISTINCT ue.id
+            FROM reclamations r, demandes d, etudiants e, unite_enseignements ue
             WHERE r.id = d.demandeable_id
+            AND ue.reclamation_id = r.id
             AND d.etudiant_id = e.id
             AND e.etablissement_id = '.$utilisateur->etablissement_id
         );
@@ -48,7 +71,7 @@ class UtilisateursController extends Controller
 
         #Le nbre de demandes de releve pour un etablissement donné
         $releves = DB::select('
-            SELECT *
+            SELECT DISTINCT r.id
             FROM releves r, demandes d, etudiants e
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
@@ -59,7 +82,7 @@ class UtilisateursController extends Controller
 
         #Le nbre de dmd de rel definitifs pr en ets donné
         $rel_def = DB::select('
-            SELECT *
+            SELECT DISTINCT r.id
             FROM releves r, demandes d, etudiants e
             WHERE r.type_releve = "definitif"
             AND r.id = d.demandeable_id
@@ -71,7 +94,7 @@ class UtilisateursController extends Controller
 
         #Le nbre de dmd de rel intermediaire pr en ets donné
         $rel_inter = DB::select('
-            SELECT *
+            SELECT DISTINCT r.id
             FROM releves r, demandes d, etudiants e
             WHERE r.type_releve = "intermediaire"
             AND r.id = d.demandeable_id
@@ -83,7 +106,7 @@ class UtilisateursController extends Controller
 
         #Selectionner les demandes pr un ets donné
         $demandes = DB::select('
-            SELECT d.id, d.date_depot, d.etat, e.name, e.first_name
+            SELECT d.id, d.date_depot, d.etat, e.name, e.first_name, d.demandeable_type
             FROM demandes d, etudiants e
             WHERE d.etudiant_id = e.id
             AND e.etablissement_id ='.$utilisateur->etablissement_id.'
@@ -91,103 +114,48 @@ class UtilisateursController extends Controller
         );
 
         ##Pourcentage ops
-        $Rel_depot = DB::select('
-            SELECT *
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND r.etape_id = et.id
-            AND d.etudiant_id = e.id
-            AND et.libelle = "Dépôt"
-            AND et.type = "releve"
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
+        $Rel_depot = $this->releveEtape("Dépôt");
         $nRel_depot = COUNT($Rel_depot);
-        if($nReleves > 0)
-        {
+        if($nReleves > 0){
             $p_depot = 100 * ($nRel_depot/$nReleves);
         }
-        else
-        {
+        else{
             $p_depot = 0;
         }
 
-        $Rel_imprime = DB::select('
-            SELECT *
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND r.etape_id = et.id
-            AND d.etudiant_id = e.id
-            AND et.libelle = "Imprimé"
-            AND et.type = "releve"
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
+        $Rel_imprime = $this->releveEtape("Imprimé");
         $nRel_imprime = COUNT($Rel_imprime);
-        if($nReleves > 0)
-        {
+        if($nReleves > 0){
             $p_imprime = 100 * ($nRel_imprime/$nReleves);
         }
-        else
-        {
+        else{
             $p_imprime = 0;
         }
 
-        $Rel_verification = DB::select('
-            SELECT *
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND r.etape_id = et.id
-            AND d.etudiant_id = e.id
-            AND et.libelle = "Vérification"
-            AND et.type = "releve"
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
+        $Rel_verification = $this->releveEtape("Vérification");
         $nRel_verification = COUNT($Rel_verification);
-        if($nReleves > 0)
-        {
+        if($nReleves > 0){
             $p_verification = 100 * ($nRel_verification/$nReleves);
         }
-        else
-        {
+        else{
             $p_verification = 0;
         }
 
-        $Rel_signature = DB::select('
-            SELECT *
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND r.etape_id = et.id
-            AND d.etudiant_id = e.id
-            AND et.libelle = "Signature"
-            AND et.type = "releve"
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
+        $Rel_signature = $this->releveEtape("Signature");
         $nRel_signature = COUNT($Rel_signature);
-        if($nReleves > 0)
-        {
+        if($nReleves > 0){
             $p_signature = 100 * ($nRel_signature/$nReleves);
         }
-        else
-        {
+        else{
             $p_signature = 0;
         }
 
-        $Rel_traite = DB::select('
-            SELECT *
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND r.etape_id = et.id
-            AND d.etudiant_id = e.id
-            AND et.libelle = "Traité"
-            AND et.type = "releve"
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
+        $Rel_traite = $this->releveEtape("Traité");
         $nRel_traite = COUNT($Rel_traite);
-        if($nReleves > 0)
-        {
+        if($nReleves > 0){
             $p_traite = 100 * ($nRel_traite/$nReleves);
         }
-        else
-        {
+        else{
             $p_traite = 0;
         }
 

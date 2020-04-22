@@ -135,6 +135,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Etudiant</th>
                                 <th scope="col">Date de dépôt</th>
+                                <th scope="col">Type demande</th>
                                 <th scope="col">Etat</th>
                               </tr>
                             </thead>
@@ -144,6 +145,7 @@
                                         <th scope="row">{{ $demande->id}}</th>
                                         <td>{{ $demande->name}} {{ $demande->first_name}}</td>
                                         <td>{{ $demande->date_depot }}</td>
+                                        <td>@if($demande->demandeable_type =='App\Releve')Releve @else Réclamation @endif</td>
                                         <td>
                                             <span class="badge badge-pill badge-info">{{ $demande->etat }}</span>
                                         </td>
