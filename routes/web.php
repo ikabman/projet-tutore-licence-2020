@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
-
-
 Route::view('/', 'welcome');
 Auth::routes();
 Auth::logout();
@@ -46,14 +43,14 @@ Route::get('/etudiants/reclamations/etapes', 'ReclamationsController@etape');#
 Route::get('/utilisateurs', 'UtilisateursController@index');#acceuil utilisateur
 Route::get('/utilisateurs/releves', 'RelevesController@index');#page de recap de releve
 Route::get('/utilisateurs/reclamations', 'ReclamationsController@index');#page de recap de reclamation
-Route::get('/utilisateurs/reclamations/depots', 'DepotReclamationsController@index');# page index des reclamations a l'etape depot
-Route::get('/utilisateurs/reclamations/verifications', 'VerificationReclamationsController@index');# page index des reclamations a l'etape verification
-Route::get('/utilisateurs/reclamations/traites', 'TraiteReclamationsController@index');# page index des reclamations a l'etape traite
-Route::get('/utilisateurs/releves/depots', 'DepotRelevesController@index');# page index des releves a l'etape depot
-Route::get('/utilisateurs/releves/impressions', 'ImpressionRelevesController@index');# page index des releves a l'etape impression
-Route::get('/utilisateurs/releves/verifications', 'VerificationRelevesController@index');# page index des releves a l'etape Verification
-Route::get('/utilisateurs/releves/signatures', 'SignatureRelevesController@index');# page index des releves a l'etape Signature
-Route::get('/utilisateurs/releves/traites', 'TraiteRelevesController@index');# page index des releves a l'etape Traite
+Route::get('/utilisateurs/reclamations/depots', 'EtapeReclamationController@depots');# page index des reclamations a l'etape depot
+Route::get('/utilisateurs/reclamations/verifications', 'EtapeReclamationController@verifications');# page index des reclamations a l'etape verification
+Route::get('/utilisateurs/reclamations/traites', 'EtapeReclamationController@traites');# page index des reclamations a l'etape traite
+Route::get('/utilisateurs/releves/depots', 'EtapeReleveController@depots');# page index des releves a l'etape depot
+Route::get('/utilisateurs/releves/impressions', 'EtapeReleveController@impressions');# page index des releves a l'etape impression
+Route::get('/utilisateurs/releves/verifications', 'EtapeReleveController@verifications');# page index des releves a l'etape Verification
+Route::get('/utilisateurs/releves/signatures', 'EtapeReleveController@signatures');# page index des releves a l'etape Signature
+Route::get('/utilisateurs/releves/traites', 'EtapeReleveController@traites');# page index des releves a l'etape Traite
 
 ##Action administrateur
 Route::post('/utilisateurs/actions', 'UtilisateursController@passage');

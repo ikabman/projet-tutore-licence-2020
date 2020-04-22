@@ -2,133 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use App\Demande;
-use App\Etudiant;
-use App\Releve;
-use App\Reclamation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class EtapeReclamationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:etudiant')->only('create', 'store');
-
-        $this->middleware('auth:utilisateur')->only('index');
+    public function __construct() {
+        $this->middleware('auth:utilisateur')->only('depots', 'verifications', 'traites');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    /*
+    *Cette fonction a pour but de contenir la requête de selection des reclamations
+    *afin d'éviter les redondances d'une part -le seul paramètre variant étant etape_id- et
+    *d'autre part de faciliter la modification de la requête et/ou sa mise à jour.
+    */
+    public function reclamations($etapeId){
         $utilisateur = Auth::user();
-
-        $Rec_depots = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
+        $demandes = DB::select('
+            SELECT DISTINCT e.name, e.first_name, u.code, u.type_note, u.id, u.etape_id
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
             WHERE d.demandeable_id = r.id
             AND d.etudiant_id = e.id
-            AND d.etape_id = 10
+            AND u.etape_id = '.$etapeId.'
             AND u.reclamation_id = r.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id
         );
+        return $demandes;
+    }
 
-        $Rec_verifications = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
-            FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND d.etape_id = 11
-            AND u.reclamation_id = r.id
-            AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
-
-        $Rec_traites = DB::select('
-        SELECT DISTINCT r.id, e.name, e.first_name, u.code, u.type_note
-        FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u
-        WHERE d.demandeable_id = r.id
-        AND d.etudiant_id = e.id
-        AND d.etape_id = 12
-        AND u.reclamation_id = r.id
-        AND e.etablissement_id = '.$utilisateur->etablissement->id
-        );
-
+    /*
+    *Cette fonction renvoie les reclamations à l'étape dépôt
+    */
+    public function depots(){
+        $Rec_depots = $this->reclamations(10);
+        $nRec_depots = count($Rec_depots);
         return view('utilisateurs.admin-depot-reclam', compact([
             'Rec_depots',
-            'Rec_verifications',
-            'Rec_traites',
+            'nRec_depots',
         ]));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    /*
+    *Cette fonction renvoie les reclamations à l'étape vérification
+    */
+    public function verifications(){
+        $Rec_verifications = $this->reclamations(11);
+        $nRec_verifications = count($Rec_verifications);
+        return view('utilisateurs.admin-verification-reclam', compact([
+            'Rec_verifications',
+            'nRec_verifications',
+        ]));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    /*
+    *Cette fonction renvoie les reclamations à l'étape fin traitment
+    */
+    public function traites(){
+        $Rec_traites = $this->reclamations(12);
+        $nRec_traites = count($Rec_traites);
+        return view('utilisateurs.admin-finTraitement-reclam', compact([
+            'Rec_traites',
+            'nRec_traites',
+        ]));
     }
 }

@@ -16,7 +16,6 @@ class RelevesController extends Controller
     public function __construct()
     {
         $this->middleware('auth:etudiant')->only('create', 'store', 'etape');
-
         $this->middleware('auth:utilisateur')->only('index');
     }
 
@@ -30,69 +29,45 @@ class RelevesController extends Controller
     }
 
     /**
+    *Cette fonction a pour but de contenir la requête de selection des releves
+    *afin d'éviter les redondances d'une part -le seul paramètre variant étant etape_id- et
+    *d'autre part de faciliter la modification de la requête et/ou sa mise à jour.
+    */
+    public function releves($etapeId){
+        $utilisateur = Auth::user();
+        $demandes = DB::select('
+            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
+            FROM releves r, demandes d, etudiants e, etapes et
+            WHERE d.demandeable_id = r.id
+            AND d.etudiant_id = e.id
+            AND r.etape_id = '.$etapeId.'
+            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
+            LIMIT 5'
+        );
+        return $demandes;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $utilisateur = Auth::user();
-
-        $Rel_depots = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND r.etape_id = 3
-            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
-            LIMIT 5'
-        );
+        $Rel_depots = $this->releves(3);
         $nRel_depots = count($Rel_depots);
 
-        $Rel_impressions = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND r.etape_id = 4
-            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
-            LIMIT 5'
-        );
+        $Rel_impressions = $this->releves(4);
         $nRel_impressions = count($Rel_impressions);
 
-        $Rel_verifications = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND r.etape_id = 5
-            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
-            LIMIT 5'
-        );
+        $Rel_verifications = $this->releves(5);
         $nRel_verifications = count($Rel_verifications);
 
-        $Rel_signatures = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND r.etape_id = 6
-            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
-            LIMIT 5'
-        );
+        $Rel_signatures = $this->releves(6);
         $nRel_signatures = count($Rel_signatures);
 
-        $Rel_traites = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve
-            FROM releves r, demandes d, etudiants e, etapes et
-            WHERE d.demandeable_id = r.id
-            AND d.etudiant_id = e.id
-            AND r.etape_id = 7
-            AND e.etablissement_id = '.$utilisateur->etablissement->id.'
-            LIMIT 5'
-        );
+        $Rel_traites = $this->releves(7);
         $nRel_traites = count($Rel_traites);
-
 
         return view('utilisateurs.admin-releves-recap', compact([
             'Rel_traites',
@@ -195,49 +170,5 @@ class RelevesController extends Controller
         }
 
         return view('etudiants.etu-releve-etape', ['releve' => $releve]);
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Releve $releve)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Releve $releve)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Releve $releve)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Releve $releve)
-    {
-        //
     }
 }
