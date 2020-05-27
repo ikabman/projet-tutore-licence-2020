@@ -19,27 +19,30 @@ P.S: prendre en compte ce renommage; ne pas le changer.
 1- controllers renvoyer 'roles'
 2-                      'etablissements'
 -->
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
     <title>Inscription</title>
-    <!--local bootstrap for offline coding-->
+    <!--local bootstrap for offline coding ->
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css"/>
 </head>
-<body style="margin-top:5%">
+<body style="margin-top:5%">-->
+@extends('layouts.layout-admin')
+@section('contenu-admin')
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin-bottom: 5%">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center">Création d'un nouvel administrateur</div>
+                    <div class="card-header text-center" style="background-color: #4e73df; color: white">Création d'un nouvel administrateur</div>
 
                     <div class="card-body">
-                        @isset($url)
+                        <!--@isset($url)
                         <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
                             @else
                             <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
-                                @endisset
+                                @endisset-->
+                            <form method="POST" action="/register/utilisateur" aria-label="{{ __('Register') }}">
                                 @csrf
 
                                 <div class="form-group row">
@@ -184,6 +187,7 @@ P.S: prendre en compte ce renommage; ne pas le changer.
                     </div>
                 </div>
             </div>
-        </div>
+@endsection
+        <!--</div>
     </body>
-</html>
+</html>-->

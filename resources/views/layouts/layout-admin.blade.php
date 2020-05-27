@@ -82,6 +82,15 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
       <li class="nav-item">
+        <a class="nav-link" href="/register/utilisateur">
+          <i class="fas fa-user"></i>
+          <span>Administrateur</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="fas fa-history"></i>
           <span>Historique</span>

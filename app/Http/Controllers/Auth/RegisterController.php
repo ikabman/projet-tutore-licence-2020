@@ -79,7 +79,7 @@ class RegisterController extends Controller
     }
 
     ## permet de valider les donnees envoyes par le form creation utilisateur
-    protected function validatorUtilisateur(array $data)
+    /*protected function validatorUtilisateur(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
@@ -91,13 +91,13 @@ class RegisterController extends Controller
             'role' => 'required|string|max:255',
             'etablissement' => 'required|string|max:255',
         ]);
-    }
+    }*/
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     ##
-    public function showUtilisateurRegisterForm()
+    /*public function showUtilisateurRegisterForm()
     {
         $roles = \App\Role::select('id', 'libelle')->orderBy('libelle')->get();
         $etablissement= \App\Etablissement::select('id', 'libelle', 'libelle_court')->orderBy('libelle')->get();
@@ -107,7 +107,7 @@ class RegisterController extends Controller
             'etablissements' => $etablissement,
             'roles' => $roles,
             ]);
-    }
+    }*/
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -144,7 +144,7 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function createUtilisateur(Request $request)
+    /*protected function createUtilisateur(Request $request)
     {
         $this->validatorUtilisateur($request->all())->validate();
         Utilisateur::create([
@@ -158,7 +158,7 @@ class RegisterController extends Controller
             'role_id' => $request->role,
         ]);
         return redirect()->intended('login/utilisateur');
-    }
+    }*/
 
     /**
      * @param Request $request

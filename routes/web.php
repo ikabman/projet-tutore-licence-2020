@@ -20,12 +20,12 @@ Auth::logout();
 
 Route::get('/login/utilisateur', 'Auth\LoginController@showUtilisateurLoginForm');
 Route::get('/login/etudiant', 'Auth\LoginController@showEtudiantLoginForm');
-Route::get('/register/utilisateur', 'Auth\RegisterController@showUtilisateurRegisterForm');
+#Route::get('/register/utilisateur', 'Auth\RegisterController@showUtilisateurRegisterForm'); méthode renommée newAdmin() dans UtilisateurControlleur
 Route::get('/register/etudiant', 'Auth\RegisterController@showEtudiantRegisterForm');
 
 Route::post('/login/utilisateur', 'Auth\LoginController@utilisateurLogin');
 Route::post('/login/etudiant', 'Auth\LoginController@etudiantLogin');
-Route::post('/register/utilisateur', 'Auth\RegisterController@createUtilisateur');
+#Route::post('/register/utilisateur', 'Auth\RegisterController@createUtilisateur');
 Route::post('/register/etudiant', 'Auth\RegisterController@createEtudiant');
 
 Route::view('/home', 'home')->middleware('auth');
@@ -51,6 +51,10 @@ Route::get('/utilisateurs/releves/impressions', 'EtapeReleveController@impressio
 Route::get('/utilisateurs/releves/verifications', 'EtapeReleveController@verifications');# page index des releves a l'etape Verification
 Route::get('/utilisateurs/releves/signatures', 'EtapeReleveController@signatures');# page index des releves a l'etape Signature
 Route::get('/utilisateurs/releves/traites', 'EtapeReleveController@traites');# page index des releves a l'etape Traite
+
+###Création d'un nouvel administrateur
+Route::get('/register/utilisateur', 'UtilisateursController@showUtilisateurLoginForm');
+Route::post('/register/utilisateur', 'UtilisateursController@createUtilisateur');
 
 ##Action administrateur
 Route::post('/utilisateurs/actions', 'UtilisateursController@passage');

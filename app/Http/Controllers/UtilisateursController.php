@@ -6,9 +6,12 @@ use App\Demande;
 use App\Etudiant;
 use App\Releve;
 use App\Reclamation;
+use App\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UtilisateursController extends Controller
 {
@@ -197,6 +200,64 @@ class UtilisateursController extends Controller
         }
 
         return response()->json(["status" => "ok"]);
+    }
+
+
+    public function showUtilisateurLoginForm()
+    {
+        /*
+        L'administrateur ne peut créer que des administrateurs appartenant à
+        son école et ayant des rôles inferieurs ou égales au sien
+        */
+        $administrateur = Auth::user();
+        if($administrateur->role->libelle  == 'Administrateur'){
+            $roles = \App\Role::select('id', 'libelle')->orderBy('libelle')->get();
+        }else{
+            $roles = \App\Role::select('id', 'libelle')
+                            ->where('id', $administrateur->role_id)
+                            ->orderBy('libelle')->get();
+        }
+        $etablissement= \App\Etablissement::select('id', 'libelle', 'libelle_court')
+                                        ->where('id', $administrateur->etablissement_id)
+                                        ->orderBy('libelle')
+                                        ->get();
+
+        return view('auth.register_utilisateur', [
+            'url' => 'utilisateur',
+            'etablissements' => $etablissement,
+            'roles' => $roles,
+            ]);
+    }
+
+    ## permet de valider les donnees envoyes par le form creation utilisateur
+    protected function validatorUtilisateur(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'login' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|string|max:255',
+            'etablissement' => 'required|string|max:255',
+        ]);
+    }
+
+    protected function createUtilisateur(Request $request)
+    {
+        $this->validatorUtilisateur($request->all())->validate();
+        Utilisateur::create([
+            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'email' => $request->email,
+            'login' => $request->login,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'etablissement_id' => $request->etablissement,
+            'role_id' => $request->role,
+        ]);
+        return redirect()->intended('/utilisateurs');
     }
 
     /**
