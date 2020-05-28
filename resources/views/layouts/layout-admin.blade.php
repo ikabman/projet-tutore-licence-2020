@@ -53,7 +53,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item @if(isset($active)) @if($active =="dashboard") active @endif @endif">
         <a class="nav-link" href="/utilisateurs">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
@@ -63,7 +63,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <li class="nav-item">
+      <li class="nav-item @if(isset($active)) @if($active =="releves") active @endif @endif">
         <a class="nav-link" href="/utilisateurs/releves">
           <i class="fa fa-exclamation-circle"></i>
           <span>Relevés</span>
@@ -72,7 +72,7 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item">
+      <li class="nav-item @if(isset($active)) @if($active =="reclamations") active @endif @endif">
         <a class="nav-link" href="/utilisateurs/reclamations">
           <i class="fas fa-shekel-sign"></i>
           <span>Reclamations</span>
@@ -81,7 +81,7 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item">
+      <li class="nav-item @if(isset($active)) @if($active =="administrateur") active @endif @endif">
         <a class="nav-link" href="/register/utilisateur">
           <i class="fas fa-user"></i>
           <span>Administrateur</span>
@@ -90,7 +90,7 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item">
+      <li class="nav-item @if(isset($active)) @if($active =="historique") active @endif @endif">
         <a class="nav-link" href="#">
           <i class="fas fa-history"></i>
           <span>Historique</span>

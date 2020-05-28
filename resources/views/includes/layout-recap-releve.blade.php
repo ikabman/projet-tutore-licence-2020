@@ -9,28 +9,28 @@
     <!--Diapo resume content-->
     <div class="navbar navbar-expand-lg navbar-white diapo-nav-style bg-white mb-5 bg-white rounded">
         <div class="row diapo-style">
-            <div class="col order-first  activ-box activ-etap1 diapo-cont">
-                <a href="/utilisateurs/releves/depots">
+            <div class="col order-first activ-etap1 diapo-cont @if(isset($etape)) @if($etape == "depots") activ-box @endif @endif">
+                <a href="/utilisateurs/releves/depots" title="Dépôt de relevés">
                     <img src="/img/etape1.png"/>
                 </a>
             </div>
-            <div class="col diapo-cont">
-                <a href="/utilisateurs/releves/impressions">
+            <div class="col diapo-cont @if(isset($etape)) @if($etape == "imprimes") activ-box @endif @endif">
+                <a href="/utilisateurs/releves/impressions" title="Impression de relevés">
                     <img src="/img/etape2.png"/>
                 </a>
             </div>
-            <div class="col diapo-cont ">
-                <a href="/utilisateurs/releves/verifications">
+            <div class="col diapo-cont @if(isset($etape)) @if($etape == "verifications") activ-box @endif @endif">
+                <a href="/utilisateurs/releves/verifications" title="Vérification de relevés">
                     <img src="/img/etape3.png"/>
                 </a>
             </div>
-            <div class="col diapo-cont">
-                <a href="/utilisateurs/releves/signatures">
+            <div class="col diapo-cont @if(isset($etape)) @if($etape == "signatures") activ-box @endif @endif">
+                <a href="/utilisateurs/releves/signatures" title="Signature de relevés">
                     <img src="/img/etape4.png"/>
                 </a>
             </div>
-            <div class="col order-last diapo-cont">
-                <a href="/utilisateurs/releves/traites">
+            <div class="col order-last diapo-cont @if(isset($etape)) @if($etape == "traites") activ-box @endif @endif">
+                <a href="/utilisateurs/releves/traites" title="Traitements effectués">
                     <img src="/img/etape5.png"/>
                 </a>
             </div>

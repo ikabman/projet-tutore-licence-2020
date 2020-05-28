@@ -9,18 +9,18 @@
     <!--Diapo resume content-->
     <div class="navbar navbar-expand-lg navbar-white diapo-nav-style2 bg-white mb-5 bg-white rounded ">
         <div class="row diapo-style2">
-            <div class="col order-first  activ-box activ-etap1 diapo-cont">
-                <a href="/utilisateurs/reclamations/depots">
+            <div class="col order-first diapo-cont @if(isset($etape)) @if($etape == "depots") activ-box @endif @endif">
+                <a href="/utilisateurs/reclamations/depots" title="Dépot de réclamations">
                     <img src="/img/etape1.png"/>
                 </a>
             </div>
-            <div class="col diapo-cont">
-                <a href="/utilisateurs/reclamations/verifications">
+            <div class="col diapo-cont @if(isset($etape)) @if($etape == "verifications") activ-box @endif @endif">
+                <a href="/utilisateurs/reclamations/verifications" title="Vérification de réclamations">
                     <img src="/img/etape3.png"/>
                 </a>
             </div>
-            <div class="col order-last diapo-cont">
-                <a href="/utilisateurs/reclamations/traites">
+            <div class="col order-last diapo-cont @if(isset($etape)) @if($etape == "traites") activ-box @endif @endif">
+                <a href="/utilisateurs/reclamations/traites"  title="Traitements effectués">
                     <img src="/img/etape5.png"/>
                 </a>
             </div>

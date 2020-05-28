@@ -37,9 +37,13 @@ class EtapeReclamationController extends Controller
     public function depots(){
         $Rec_depots = $this->reclamations(10);
         $nRec_depots = count($Rec_depots);
+        $etape = "depots"; #Uitle uniquement pour l'affichage visuel
+        $active = "reclamations";
         return view('utilisateurs.admin-depot-reclam', compact([
             'Rec_depots',
             'nRec_depots',
+            'etape',
+            'active'
         ]));
     }
 
@@ -49,9 +53,13 @@ class EtapeReclamationController extends Controller
     public function verifications(){
         $Rec_verifications = $this->reclamations(11);
         $nRec_verifications = count($Rec_verifications);
+        $etape = "verifications"; #Uitle uniquement pour l'affichage visuel
+        $active = "reclamations";
         return view('utilisateurs.admin-verification-reclam', compact([
             'Rec_verifications',
             'nRec_verifications',
+            'etape',
+            'active'
         ]));
     }
 
@@ -61,9 +69,13 @@ class EtapeReclamationController extends Controller
     public function traites(){
         $Rec_traites = $this->reclamations(12);
         $nRec_traites = count($Rec_traites);
+        $etape = "traites"; #Uitle uniquement pour l'affichage visuel
+        $active = "reclamations";
         return view('utilisateurs.admin-finTraitement-reclam', compact([
             'Rec_traites',
             'nRec_traites',
+            'etape',
+            'active'
         ]));
     }
 }

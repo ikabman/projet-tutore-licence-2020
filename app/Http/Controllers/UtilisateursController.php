@@ -162,6 +162,7 @@ class UtilisateursController extends Controller
             $p_traite = 0;
         }
 
+        $active = "dashboard";
         return view('utilisateurs.index', compact([
             'nEtudiants',
             'nRel_inter',
@@ -174,6 +175,7 @@ class UtilisateursController extends Controller
             'p_verification',
             'p_imprime',
             'p_depot',
+            'active'
         ]));
     }
 
@@ -217,15 +219,17 @@ class UtilisateursController extends Controller
                             ->where('id', $administrateur->role_id)
                             ->orderBy('libelle')->get();
         }
-        $etablissement= \App\Etablissement::select('id', 'libelle', 'libelle_court')
+        $etablissement = \App\Etablissement::select('id', 'libelle', 'libelle_court')
                                         ->where('id', $administrateur->etablissement_id)
                                         ->orderBy('libelle')
                                         ->get();
 
+        $active = "administrateur";
+        
         return view('auth.register_utilisateur', [
-            'url' => 'utilisateur',
             'etablissements' => $etablissement,
             'roles' => $roles,
+            'active' => $active
             ]);
     }
 

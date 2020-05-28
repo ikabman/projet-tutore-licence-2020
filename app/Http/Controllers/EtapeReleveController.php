@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EtapeReleveController extends Controller
 {
-
+    
     public function __construct()
     {
         return $this->middleware('auth:utilisateur');
@@ -38,9 +38,13 @@ class EtapeReleveController extends Controller
     public function depots(){
         $Rel_depots = $this->releves(3);
         $nRel_depots = COUNT($Rel_depots);
+        $etape =  "depots";#utile uniquement pour l'activ-box
+        $active = "releves";
         return view('utilisateurs.admin-depot-rel', compact([
             'Rel_depots',
             'nRel_depots',
+            'etape',
+            'active'
         ]));
     }
 
@@ -50,9 +54,13 @@ class EtapeReleveController extends Controller
     public function impressions(){
         $Rel_imprimes = $this->releves(4);
         $nRel_imprimes = COUNT($Rel_imprimes);
+        $etape = "imprimes";
+        $active = "releves";
         return view('utilisateurs.admin-impression-rel', compact([
             'Rel_imprimes',
             'nRel_imprimes',
+            'etape',
+            'active'
         ]));
     }
 
@@ -62,9 +70,13 @@ class EtapeReleveController extends Controller
     public function verifications(){
         $Rel_verifications = $this->releves(5);
         $nRel_verifications = COUNT($Rel_verifications);
+        $etape = "verifications";
+        $active = "releves";
         return view('utilisateurs.admin-verification-rel', compact([
             'Rel_verifications',
             'nRel_verifications',
+            'etape',
+            'active'
         ]));
     }
 
@@ -74,9 +86,13 @@ class EtapeReleveController extends Controller
     public function signatures(){
         $Rel_signatures = $this->releves(6);
         $nRel_signatures = COUNT($Rel_signatures);
+        $etape = "signatures";
+        $active = "releves";
         return view('utilisateurs.admin-signature-rel', compact([
             'Rel_signatures',
             'nRel_signatures',
+            'etape',
+            'active'
         ]));
     }
 
@@ -86,9 +102,13 @@ class EtapeReleveController extends Controller
     public function traites(){
         $Rel_traites = $this->releves(7);
         $nRel_traites = COUNT($Rel_traites);
+        $etape = "traites";
+        $active = "releves";
         return view('utilisateurs.admin-finTraitement-rel', compact([
             'Rel_traites',
             'nRel_traites',
+            'etape',
+            'active'
         ]));
     }
 }

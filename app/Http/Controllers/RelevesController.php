@@ -69,6 +69,8 @@ class RelevesController extends Controller
         $Rel_traites = $this->releves(7);
         $nRel_traites = count($Rel_traites);
 
+        $active = "releves";
+
         return view('utilisateurs.admin-releves-recap', compact([
             'Rel_traites',
             'Rel_signatures',
@@ -80,6 +82,7 @@ class RelevesController extends Controller
             'nRel_verifications',
             'nRel_signatures',
             'nRel_impressions',
+            'active'
         ]));
     }
 

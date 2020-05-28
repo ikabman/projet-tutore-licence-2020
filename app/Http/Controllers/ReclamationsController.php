@@ -87,10 +87,13 @@ class ReclamationsController extends Controller
         $Rec_traites = $this->reclamations(12);
         $nRec_traites = count($Rec_traites);
 
+        $active = "reclamations";
+
         return view('utilisateurs.admin-reclamations-recap', compact([
             'Rec_depots',
             'Rec_verifications',
             'Rec_traites',
+            'active'
         ]));
     }
 
