@@ -1,9 +1,9 @@
 body {
-    background: rgb(216, 210, 210);
+    background-color:rgba(0, 0, 0, 0.04);
 }
 
 .register {
-    background: #908ef1;
+    background: #008ef1;
     margin-top: 50px;
     padding: 2%;
     box-shadow: 1px 1px 4px black;

@@ -27,7 +27,7 @@
         <section class="login-block">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 login-sec">
+                    <div class="offset-lg-4 col-lg-4 login-sec">
                         <h2 class="text-center">{{ __('Connexion') }} {{ isset($url) ? ucwords($url) : ""}}</h2>
                         @isset($url)
                         <form class="login-form" method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
@@ -80,23 +80,7 @@
                             <div class="text-center">
                                 <small>Pas de compte?<a href="/register/etudiant"> S'inscrire</a></small>
                             </div>
-
                         </form>
-                    </div>
-                    <div class="col-md-8 banner-sec">
-                        <div>
-                            <div class="banner-text">
-                                <h2>Relevé et Reclamation de notes</h2>
-                                <h4>Etape 1</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incidid quis nostrud exercitation</p>
-                                <h4>Etape 2</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incidid quis nostrud exercitation</p>
-                                <h4>Etape 3</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incidid quis nostrud exercitation</p>
-                                <h4>Etape 4</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incidid quis nostrud exercitation</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

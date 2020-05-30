@@ -5,6 +5,11 @@
 	<title>Connexion</title>
 	<!--local bootstrap for offline coding-->
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
+	<style>
+		body{
+			background-color:rgba(0, 0, 0, 0.01);
+		}
+	</style>
 </head>
 <body style="margin-top:5%">
     <div class="container">

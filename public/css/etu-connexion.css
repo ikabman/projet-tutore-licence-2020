@@ -1,6 +1,6 @@
-body,
+html, body,
 .login-block {
-    background: rgb(216, 210, 210);
+    background-color:rgba(0, 0, 0, 0.01);
     width: 100%;
 }
 
@@ -17,8 +17,8 @@ body,
 }
 
 .container {
-    background: #fff;
-    box-shadow: 1px 1px 2px black;
+    /*background: #fff;
+    box-shadow: 1px 1px 2px black;*/
 }
 
 .login-sec {
@@ -44,8 +44,8 @@ body,
 
 .login-sec h2 {
     margin-bottom: 30px;
-    font-weight: 800;
-    font-size: 30px;
+    /*font-weight: 800;
+    font-size: 30px;*/
     color: #6967e2;
 }
 
