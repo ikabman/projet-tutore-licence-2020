@@ -11,10 +11,10 @@
     <nav class="navbar navbar-expand-sm shadow-sm" style="background-color:#2a5d84">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="login/etudiant" style="color:white">Etudiant</a>
+                <a class="nav-link" href="login/etudiant" style="color:white">Se connecter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="login/utilisateur" style="color:white">Administrateur</a>
+                <a class="nav-link" href="register/etudiant" style="color:white">S'inscrire</a>
             </li>
         </ul>
     </nav>
