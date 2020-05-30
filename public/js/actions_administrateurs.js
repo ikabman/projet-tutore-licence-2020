@@ -39,6 +39,7 @@ $(function(){
             var infos = $(this).val().split(':');
             $.post('/utilisateurs/actions',{type:infos[0], id:infos[1], etape:infos[2]}, function(){
                 $('#'+infos[1]).remove();
+                location.reload();
             });
         });
     });
@@ -54,6 +55,7 @@ $(function(){
         var infos = $(this).val().split(':');
         $.post('/utilisateurs/actions',{type:infos[0], id:infos[1], etape:infos[2]}, function(){
             $('#'+infos[1]).remove();
+            location.reload();
         });
     });
 });

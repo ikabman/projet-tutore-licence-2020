@@ -45,51 +45,74 @@
             <div class="table-responsive">
                 <table class="table table-striped table-sm border-left-success " id="tableDemandes" width="100%" cellspacing="0">
                     @if($nRec_traites > 0)
-                        <!--titres du tableau -->
-                        <thead class="thead-success">
-                            <tr>
-                                <!--<th scope="col" style="width: 1em;">#</th>-->
-                                <th scope="col">Nom</th>
-                                <th scope="col">Prenom</th>
-                                <th scope="col">Code Ue</th>
-                                <th scope="col">Evaluation</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <!-- Contenu du tableau -->
-                        <tbody>
-                            @foreach($Rec_traites as $rec)
-                            <tr id="{{$rec->id}}">
-                                <!--<td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                        <label class="custom-control-label" for="customCheck1"></label>
-                                    </div>
-                                </td>-->
-                                <td>{{$rec->name}}</td>
-                                <td>{{$rec->first_name}}</td>
-                                <td>
-                                    <ul class="list-group" style="list-style-type:none;">
-                                            <!--Une ligne d'Ue -->
-                                            <li>
-                                                <b>{{$rec->code}}</b>
-                                            </li>
-                                    </ul>
-                                </td>
-                                <td>{{$rec->type_note}}</td>
-                                <td>
-                                    <input type="checkbox" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
-                                </td>
-                                <td>
-                                    <button type="button" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="btn btn-success btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
-                                        Passer l'etape
-                                        <i class="fas fa-angle-double-right"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                    <!--titres du tableau -->
+                    <thead class="thead-success">
+                        <tr>
+                            <!--<th scope="col" style="width: 1em;">#</th>-->
+                            <th scope="col">Carte</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Code Ue</th>
+                            <th scope="col">Evaluation</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <!-- Contenu du tableau -->
+                    <tbody>
+                        @foreach($Rec_traites as $rec)
+                        <tr id="{{$rec->id}}">
+                            <td>{{$rec->numero_carte}}</td>
+                            <td>{{$rec->name}}</td>
+                            <td>{{$rec->first_name}}</td>
+                            <td>
+                                <ul class="list-group" style="list-style-type:none;">
+                                        <!--Une ligne d'Ue -->
+                                        <li>
+                                            <b>{{$rec->code}}</b>
+                                        </li>
+                                </ul>
+                            </td>
+                            <td>{{$rec->type_note}}</td>
+                            <td>
+                                <button class="btn btn-link btn-sm voirPlusMoins" id="maitre_{{$rec->id}}">Voir plus</botton>
+                            </td>
+                            <td>
+                                <button type="button" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="btn btn-success btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
+                                    Passer l'etape
+                                    <i class="fas fa-angle-double-right"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <input type="checkbox" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
+                            </td>
+                        </tr>
+                        <tr style="display:none; background-color:rgba(0, 0, 0, 0.05);" id="esclave_{{$rec->id}}">
+                            <td colspan="8" >
+                                <div>
+                                    <span>
+                                        <div class="row">
+                                            <b class="col-lg-6 text-right">Filière</b>: {{$rec->filiere}}<br/>
+                                        </div>
+                                        <div class="row">
+                                            <b class="col-lg-6 text-right">Libelle matière</b>: {{$rec->matiere}}<br/>
+                                        </div>
+                                        <div class="row">
+                                            <b class="col-lg-6 text-right">Note obtenue</b>: {{$rec->note_obtenue}}<br/>
+                                        </div>
+                                        <div class="row">
+                                            <b class="col-lg-6 text-right">Intervalle de note réclamé</b>: {{$rec->note_reclame}}<br/>
+                                        </div>
+                                        <div class="row">
+                                            <b class="col-lg-6 text-right">Date demande</b>: {{$rec->date_depot}}<br/>
+                                        </div>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                     @else
                         @include('includes.empty')
                     @endif

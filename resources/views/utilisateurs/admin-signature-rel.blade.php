@@ -50,10 +50,12 @@
                         <thead class="thead-info">
                             <tr>
                                 <!--<th scope="col" style="width: 1em;">#</th>-->
+                                <th scope="col">Carte</th>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Prenom</th>
                                 <th scope="col">Année du relevé</th>
                                 <th scope="col">Type de relevé</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
@@ -62,27 +64,45 @@
                         <!-- Contenu du tableau -->
                         <tbody>
                             @foreach ($Rel_signatures as $rel)
-                            <tr id="{{$rel->id}}">
-                                <!--<td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck{{$rel->id}}">
-                                        <label class="custom-control-label" for="customCheck{{$rel->id}}"></label>
-                                    </div>
-                                </td>-->
-                                <td>{{$rel->name}}</td>
-                                <td>{{$rel->first_name}}</td>
-                                <td>{{$rel->annee_du_releve}}</td>
-                                <td>{{$rel->type_releve}}</td>
-                                <td>
-                                    <input type="checkbox" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
-                                </td>
-                                <td>
-                                    <button type="button" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="btn btn-info btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
-                                        Passer l'etape
-                                        <i class="fas fa-angle-double-right"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr id="{{$rel->id}}">
+                                    <!--<td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck{{$rel->id}}">
+                                            <label class="custom-control-label" for="customCheck{{$rel->id}}"></label>
+                                        </div>
+                                    </td>-->
+                                    <td>{{$rel->numero_carte}}</td>
+                                    <td>{{$rel->name}}</td>
+                                    <td>{{$rel->first_name}}</td>
+                                    <td>{{$rel->annee_du_releve}}</td>
+                                    <td>{{$rel->type_releve}}</td>
+                                    <td>
+                                        <button class="btn btn-link btn-sm voirPlusMoins" id="maitre_{{$rel->id}}">Voir plus</botton>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
+                                    </td>
+                                    <td>
+                                        <button type="button" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="btn btn-info btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
+                                            Passer l'etape
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr style="display:none; background-color:rgba(0, 0, 0, 0.05);" id="esclave_{{$rel->id}}">
+                                    <td colspan="8" >
+                                        <div>
+                                            <span>
+                                                <div class="row">
+                                                    <b class="col-lg-6 text-right">Filière</b>: {{$rel->filiere}}<br/>
+                                                </div>
+                                                <div class="row">
+                                                    <b class="col-lg-6 text-right">Date demande</b>: {{$rel->date_depot}}<br/>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     @else

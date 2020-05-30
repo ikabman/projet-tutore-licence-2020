@@ -20,7 +20,7 @@
                 </a>
             </div>
             <div class="col order-last diapo-cont @if(isset($etape)) @if($etape == "traites") activ-box @endif @endif">
-                <a href="/utilisateurs/reclamations/traites"  title="Traitements effectués">
+                <a href="/utilisateurs/reclamations/traites"  title="Fin traitement">
                     <img src="/img/etape5.png"/>
                 </a>
             </div>

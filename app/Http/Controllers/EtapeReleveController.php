@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EtapeReleveController extends Controller
 {
-    
+
     public function __construct()
     {
         return $this->middleware('auth:utilisateur');
@@ -22,9 +22,12 @@ class EtapeReleveController extends Controller
     public function releves($etapeId){
         $utilisateur = Auth::user();
         $demandes = DB::select('
-            SELECT DISTINCT r.id, e.name, e.first_name, r.annee_du_releve, r.type_releve, r.etape_id
-            FROM releves r, demandes d, etudiants e, etapes et
+            SELECT DISTINCT r.id, e.name, e.numero_carte, e.first_name,e.numero_carte,
+                            r.annee_du_releve, r.type_releve, r.etape_id, o.libelle as filiere,
+                            d.date_depot
+            FROM releves r, demandes d, etudiants e, etapes et, options o
             WHERE d.demandeable_id = r.id
+            AND o.id = e.option_id
             AND r.etape_id = '.$etapeId.'
             AND d.etudiant_id = e.id
             AND e.etablissement_id = '.$utilisateur->etablissement->id

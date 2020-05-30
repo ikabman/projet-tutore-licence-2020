@@ -37,11 +37,11 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Ready <sup>2</sup></div>
-      </a>
+           <div class="sidebar-brand-icon">
+               <img src="/img/logo.png" alt="" style="width:60px; height: 70px"/>
+           </div>
+           <div class="sidebar-brand-text mx-3">Université de Lomé</div>
+       </a>
 
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -226,7 +226,7 @@
   <!-- Custom scripts for all pages-->
   <script src="/js/sb-admin-2.js"></script>
   <script src="/js/actions_administrateurs.js"></script>
-
+  <script src="/js/voir_plus.js"></script>
 </body>
 
 </html>

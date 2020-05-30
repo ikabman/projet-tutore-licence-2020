@@ -24,8 +24,8 @@
                                     <label for="type_releve">Type de relevé</label>
                                     <select name="type_releve" class="form-control @error('type_releve') is-invalid @enderror" id="type_releve">
                                         <option selected>- Choisir -</option>
-                                        <option value="intermediaire">Relevé intermédiaire</option>
-                                        <option value="definitif">Relevé définitif</option>
+                                        <option value="Intermediaire">Relevé intermédiaire</option>
+                                        <option value="Definitif">Relevé définitif</option>
                                     </select>
 
                                     @error('type_releve')
