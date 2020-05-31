@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
 	<style>
 		body{
-			background-color:rgba(0, 0, 0, 0.01);
+			background-color:rgba(0, 0, 0, 0.03);
 		}
 	</style>
 </head>

@@ -204,12 +204,35 @@ class UtilisateursController extends Controller
         return response()->json(["status" => "ok"]);
     }
 
+    ## permet de valider les donnees envoyes par le form creation utilisateur
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'login' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|string|max:255',
+            'etablissement' => 'required|string|max:255',
+        ]);
+    }
 
-    public function showUtilisateurLoginForm()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * Permet l'affichage du formulaire  exacte copy de showUtilisateurLoginForm()
+     * désuet car la connexion par défaut empechant la création d'un nouvel utilisateur
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         /*
         L'administrateur ne peut créer que des administrateurs appartenant à
         son école et ayant des rôles inferieurs ou égales au sien
+        puisque nous n'avons que deux rôles alors il est soit Administrateur ou
+        observateur (condition if ci-dessous)
         */
         $administrateur = Auth::user();
         if($administrateur->role->libelle  == 'Administrateur'){
@@ -224,8 +247,8 @@ class UtilisateursController extends Controller
                                         ->orderBy('libelle')
                                         ->get();
 
-        $active = "administrateur";
-        
+        $active = "administrateur";#Pour le menu latéral actif
+
         return view('auth.register_utilisateur', [
             'etablissements' => $etablissement,
             'roles' => $roles,
@@ -233,24 +256,17 @@ class UtilisateursController extends Controller
             ]);
     }
 
-    ## permet de valider les donnees envoyes par le form creation utilisateur
-    protected function validatorUtilisateur(array $data)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * Permet l'affichage du formulaire  exacte copy de createUtilisateur()
+     * désuet car la connexion par défaut empechant la création d'un nouvel utilisateur
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'first_name' => 'required|string|max:255',
-            'login' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|string|max:255',
-            'etablissement' => 'required|string|max:255',
-        ]);
-    }
-
-    protected function createUtilisateur(Request $request)
-    {
-        $this->validatorUtilisateur($request->all())->validate();
+        $this->validator($request->all())->validate();
         Utilisateur::create([
             'name' => $request->name,
             'first_name' => $request->first_name,
@@ -261,28 +277,11 @@ class UtilisateursController extends Controller
             'etablissement_id' => $request->etablissement,
             'role_id' => $request->role,
         ]);
-        return redirect()->intended('/utilisateurs');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $active = "administrateur";#Pour le menu latéral actif
+        $reussite = true;
+        return view('auth.register_utilisateur', compact([
+            'reussite',
+            'active']));
     }
 
     /**
@@ -299,24 +298,56 @@ class UtilisateursController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * Affiche dans le formulaire les informations de l'administrateur
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $administrateur =  Auth::user();
+        $etablissements = \App\Etablissement::select('id', 'libelle', 'libelle_court')
+                                        ->where('id', $administrateur->etablissement_id)
+                                        ->orderBy('libelle')
+                                        ->get();
+        $roles = \App\Role::select('id', 'libelle')
+                        ->where('id', $administrateur->role_id)
+                        ->orderBy('libelle')->get();
+        $active = "administrateur";#Pour le menu lateral actif
+        return view('auth.update_utilisateur', compact([
+            'administrateur',
+            'etablissements',
+            'roles',
+            'active']));
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * Permet la mise à jour des informations personnelles
+     * de l'administrateur
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = Auth::id();
+        $this->validator($request->all())->validate();
+        DB::update('UPDATE utilisateurs SET '.
+            'name =\''. $request->name.'\''.
+            ', first_name =\''. $request->first_name.'\''.
+            ', email =\''. $request->email.'\''.
+            ', login =\''. $request->login.'\''.
+            ', password =\''. Hash::make($request->password).'\''.
+            ', phone =\''. $request->phone.'\''.
+            ', etablissement_id ='. $request->etablissement.
+            ', role_id ='. $request->role.
+            ' WHERE id = '.Auth::id());
+        $reussite = true; #Pour afficher le message de succès
+        $active = "administrateur";#Pour le menu lateral actif
+        return view('auth.update_utilisateur', compact([
+            'reussite',
+            'active']));
     }
 
     /**

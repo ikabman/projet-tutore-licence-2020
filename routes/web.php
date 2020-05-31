@@ -53,8 +53,12 @@ Route::get('/utilisateurs/releves/signatures', 'EtapeReleveController@signatures
 Route::get('/utilisateurs/releves/traites', 'EtapeReleveController@traites');# page index des releves a l'etape Traite
 
 ###Création d'un nouvel administrateur
-Route::get('/register/utilisateur', 'UtilisateursController@showUtilisateurLoginForm');
-Route::post('/register/utilisateur', 'UtilisateursController@createUtilisateur');
+Route::get('/register/utilisateur', 'UtilisateursController@create');
+Route::post('/register/utilisateur', 'UtilisateursController@store');
+
+#Modification des informations personnelles de l'administrateur
+Route::get('/edit/utilisateur', 'UtilisateursController@edit');
+Route::post('/edit/utilisateur', 'UtilisateursController@update');
 
 ##Action administrateur
 Route::post('/utilisateurs/actions', 'UtilisateursController@passage');
