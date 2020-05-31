@@ -38,7 +38,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
            <div class="sidebar-brand-icon">
-               <img src="/img/logo.png" alt="" style="width:60px; height: 70px"/>
+               <img src="/img/logo.png" alt="" style="width:60px; height: 80px; margin-top: 7px"/>
            </div>
            <div class="sidebar-brand-text mx-3">Université de Lomé</div>
        </a>
