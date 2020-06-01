@@ -115,6 +115,9 @@ class UtilisateursController extends Controller
             AND e.etablissement_id ='.$utilisateur->etablissement_id.'
             LIMIT 3'
         );
+        #Selection de l'établissement de l'administrateurs
+        $etablissement = DB::select('SELECT libelle FROM etablissements WHERE id ='.$utilisateur->etablissement_id);
+        $etablissement = $etablissement[0]->libelle;
 
         ##Pourcentage ops
         $Rel_depot = $this->releveEtape("Dépôt");
@@ -175,7 +178,8 @@ class UtilisateursController extends Controller
             'p_verification',
             'p_imprime',
             'p_depot',
-            'active'
+            'active',
+            'etablissement'
         ]));
     }
 

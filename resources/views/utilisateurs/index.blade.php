@@ -2,7 +2,7 @@
 @section('contenu-admin')
     <div class="container">
         <div>
-            <h2 class="text-primary">Dashboard</h2>
+            <h2 class="text-primary">@if(isset($etablissement)) {{ $etablissement }} @else Dashboard @endif</h2>
         </div>
         <!-- Ligne des cards de resume -->
         <div class="row">
