@@ -171,7 +171,7 @@ class RelevesController extends Controller
         if(isset($releve[0])){
             $releve = $releve[0];
         }
-
-        return view('etudiants.etu-releve-etape', ['releve' => $releve]);
+        $active = "releves";#Pour l'activeation du menu latéral
+        return view('etudiants.etu-releve-etape', ['releve' => $releve, 'active'=>$active]);
     }
 }

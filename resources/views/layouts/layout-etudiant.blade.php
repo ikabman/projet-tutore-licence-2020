@@ -51,16 +51,16 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item @if(isset($active) AND $active == 'accueil') active @endif">
         <a class="nav-link" href="/etudiants">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Acceuil</span></a>
+          <span>Accueil</span></a>
       </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <li class="nav-item">
+      <li class="nav-item @if(isset($active) AND $active == 'releves') active @endif">
         <a class="nav-link" href="/etudiants/releves/etapes">
           <i class="fa fa-exclamation-circle"></i>
           <span>Relevés</span></a>
@@ -68,7 +68,7 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item">
+      <li class="nav-item @if(isset($active) AND $active == 'reclamations') active @endif">
         <a class="nav-link" href="/etudiants/reclamations/etapes">
           <i class="fas fa-shekel-sign"></i>
           <span>Reclamations</span></a>
@@ -76,9 +76,9 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-dollar"></i>
+      <li class="nav-item @if(isset($active) AND $active == "payement") active @endif">
+        <a class="nav-link" href="/etudiants/payement">
+          <i class="fas fa-rouble"></i>
           <span>Payements</span></a>
       </li>
 
@@ -187,9 +187,9 @@
                     </div>
                 </div>
 
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/edit/etudiant">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Changer de mot de passe
+                  Modifier informations personnelles
                 </a>
                 <!--**-->
                 <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

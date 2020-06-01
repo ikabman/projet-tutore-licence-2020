@@ -259,9 +259,7 @@ class UtilisateursController extends Controller
             'login' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|string|max:255',
-            'etablissement' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed'
         ]);
     }
 
@@ -351,18 +349,9 @@ class UtilisateursController extends Controller
     public function edit(Request $request)
     {
         $administrateur =  Auth::user();
-        $etablissements = \App\Etablissement::select('id', 'libelle', 'libelle_court')
-                                        ->where('id', $administrateur->etablissement_id)
-                                        ->orderBy('libelle')
-                                        ->get();
-        $roles = \App\Role::select('id', 'libelle')
-                        ->where('id', $administrateur->role_id)
-                        ->orderBy('libelle')->get();
         $active = "administrateur";#Pour le menu lateral actif
         return view('auth.update_utilisateur', compact([
             'administrateur',
-            'etablissements',
-            'roles',
             'active']));
     }
 
@@ -379,16 +368,15 @@ class UtilisateursController extends Controller
     {
         $id = Auth::id();
         $this->validator($request->all())->validate();
-        DB::update('UPDATE utilisateurs SET '.
-            'name =\''. $request->name.'\''.
-            ', first_name =\''. $request->first_name.'\''.
-            ', email =\''. $request->email.'\''.
-            ', login =\''. $request->login.'\''.
-            ', password =\''. Hash::make($request->password).'\''.
-            ', phone =\''. $request->phone.'\''.
-            ', etablissement_id ='. $request->etablissement.
-            ', role_id ='. $request->role.
-            ' WHERE id = '.Auth::id());
+        DB::update('UPDATE utilisateurs
+                    SET name = ?, first_name = ?, email = ?,
+                    login = ?, password = ?, phone = ?
+                    WHERE id = ?
+                    ', [$request->name, $request->first_name, $request->email,
+                        $request->login, Hash::make($request->password),
+                        $request->phone, Auth::id()
+                       ]
+                   );        
         $reussite = true; #Pour afficher le message de succès
         $active = "administrateur";#Pour le menu lateral actif
         return view('auth.update_utilisateur', compact([

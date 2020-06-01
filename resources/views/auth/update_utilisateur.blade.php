@@ -52,33 +52,7 @@ de l'administrateur-->
                                         <div class="col-md-6">
                                             <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ $administrateur->login }}" required autocomplete="login">
                                         </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="offset-md-2 col-md-8">
-                                            <select class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" value="{{ old('etablissement') }}">
-                                                <option>{{ __('Faculté/Etablissement/Ecole') }}</option>
-                                                @foreach($etablissements as $etablissement)
-                                                <option value="{{$etablissement['id']}}">
-                                                    {{$etablissement['libelle']}} @if($etablissement['libelle_court']!=null)({{$etablissement['libelle_court']}})@endif
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="offset-md-2 col-md-8">
-                                            <select class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}">
-                                                <option>{{ __('Role') }}</option>
-                                                @foreach($roles as $role)
-                                                <option value="{{$role['id']}}">
-                                                    {{ $role['libelle'] }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </div>                                    
 
                                     <div class="form-group row">
                                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>

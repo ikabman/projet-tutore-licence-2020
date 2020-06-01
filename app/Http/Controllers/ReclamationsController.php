@@ -173,6 +173,7 @@ class ReclamationsController extends Controller
                              .' AND ue.reclamation_id = r.id'
                              .' AND d.etudiant_id = '.$id);
 
-        return view('etudiants.etu-reclamation-etape', ['ues' => $ues]);
+        $active = "reclamations";#Pour l'activeation du menu latéral
+        return view('etudiants.etu-reclamation-etape', ['ues' => $ues, 'active'=>$active]);
     }
 }

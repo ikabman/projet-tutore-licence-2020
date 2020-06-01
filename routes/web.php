@@ -38,7 +38,10 @@ Route::get('/etudiants/releves/create', 'RelevesController@create');#page de etu
 Route::post('/releves', 'RelevesController@store');#stockage reclamation
 Route::get('/etudiants/releves/etapes', 'RelevesController@etape');#
 Route::get('/etudiants/reclamations/etapes', 'ReclamationsController@etape');#
-Route::post('/etudiants/notifications/lu', 'EtudiantsController@notification');#Pour marquer une notification comme lu 
+Route::post('/etudiants/notifications/lu', 'EtudiantsController@notification');#Pour marquer une notification comme lu
+Route::get('/edit/etudiant', 'EtudiantsController@edit');
+Route::post('/edit/etudiant', 'EtudiantsController@update');
+Route::get('/etudiants/payement', 'EtudiantsController@payement');
 
 ##Route des resources Controller Utilisateur
 Route::get('/utilisateurs', 'UtilisateursController@index');#acceuil utilisateur
