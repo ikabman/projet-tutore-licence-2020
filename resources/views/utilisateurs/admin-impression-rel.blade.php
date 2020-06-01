@@ -80,10 +80,10 @@
                                         <button class="btn btn-link btn-sm voirPlusMoins" id="maitre_{{$rel->id}}">Voir plus</botton>
                                     </td>
                                     <td>
-                                        <input type="checkbox" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
+                                        <input type="checkbox" value="releve:{{$rel->id}}:{{$rel->etape_id}}:{{$rel->etudiant_id}}" class="action_groupe_checkbox" style="display:none"/>
                                     </td>
                                     <td>
-                                        <button type="button" value="releve:{{$rel->id}}:{{$rel->etape_id}}" class="btn btn-primary btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
+                                        <button type="button" value="releve:{{$rel->id}}:{{$rel->etape_id}}:{{$rel->etudiant_id}}" class="btn btn-primary btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
                                             Passer l'etape
                                             <i class="fas fa-angle-double-right"></i>
                                         </button>

@@ -8,6 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <!--
+  Important pour les requêtes ajax avec Laravel
+  -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Relevés & Reclamations</title>
 
@@ -71,6 +75,14 @@
       </li>
 
       <!-- Divider -->
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-dollar"></i>
+          <span>Payements</span></a>
+      </li>
+
+      <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
     </ul>
     <!-- End of Sidebar -->
@@ -118,25 +130,19 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- décompte -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter">@if(isset($nombre) AND ($nombre > 0)){{$nombre}}@endif</span>
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
-                  notifications
+                  Notifications
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
+                <a class="dropdown-item d-flex align-items-center" href="#notification">
                   <div>
-                    <div class="small text-gray-500">Janvier 12 2020</div>
-                    <span class="font-weight-bold">Titre notif .........</span>
+                    <span class="font-weight-bold">@if(isset($nombre) AND ($nombre > 0))Vous avez {{$nombre}} nouvelles notifications @else Aucune nouvelle notification @endif</span>
                   </div>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <!--<a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
                     <div class="icon-circle bg-success">
                       <i class="fas fa-donate text-white"></i>
@@ -158,7 +164,7 @@
                     <span class="font-weight-bold">Titre notif .........</span>
                   </div>
                 </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Toutes les notifications</a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Toutes les notifications</a>-->
               </div>
             </li>
 
@@ -257,6 +263,9 @@
 
   <!--Script pour les réclamations multiples-->
   <script src="/js/multiple_reclamations.js"></script>
+
+  <!--Script pour confirmer que l'étudiant à lu sa notification-->
+  <script src="/js/lu.js"></script>
 </body>
 
 </html>

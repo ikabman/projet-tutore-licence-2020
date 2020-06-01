@@ -31,4 +31,7 @@ class Utilisateur extends Authenticatable
         return $this->belongsTo('App\Etablissement');
     }
 
+    public function notifications(){
+        return $this->hasMany('App\Notification');
+    }
 }

@@ -37,10 +37,12 @@ $(function(){
     $('.passer_etape_groupe_btn').click(function(e){
         $('.action_groupe_checkbox:checked').each(function(){
             var infos = $(this).val().split(':');
-            $.post('/utilisateurs/actions',{type:infos[0], id:infos[1], etape:infos[2]}, function(){
-                $('#'+infos[1]).remove();
-                location.reload();
-            });
+            $.post('/utilisateurs/actions',
+                    {type:infos[0], id:infos[1], etape:infos[2],etudiant:infos[3]},
+                    function(){
+                        $('#'+infos[1]).remove();
+                        location.reload();
+                    });
         });
     });
 
@@ -53,7 +55,7 @@ $(function(){
     */
     $('.passer_etape_unique_btn').click(function(e){
         var infos = $(this).val().split(':');
-        $.post('/utilisateurs/actions',{type:infos[0], id:infos[1], etape:infos[2]}, function(){
+        $.post('/utilisateurs/actions',{type:infos[0], id:infos[1], etape:infos[2], etudiant:infos[3]}, function(){
             $('#'+infos[1]).remove();
             location.reload();
         });

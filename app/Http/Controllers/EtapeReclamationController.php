@@ -20,7 +20,7 @@ class EtapeReclamationController extends Controller
     public function reclamations($etapeId){
         $utilisateur = Auth::user();
         $demandes = DB::select('
-            SELECT DISTINCT e.name, e.numero_carte, o.libelle as filiere,
+            SELECT DISTINCT e.id AS etudiant_id, e.name, e.numero_carte, o.libelle as filiere,
                             u.libelle as matiere,e.first_name, u.code, u.type_note,
                             u.id, u.etape_id, u.note_obtenue, u.note_reclame, d.date_depot
             FROM reclamations r, demandes d, etudiants e, etapes et, unite_enseignements u, options o

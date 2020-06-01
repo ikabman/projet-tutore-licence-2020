@@ -71,15 +71,16 @@
                 </div>
             </div>
             <div class="row my-4">
+                <!--
                 <div class="col-lg-6 border-left-dark">
                     <div class="card-body">
                         <h5 class="card-title"><i class="far fa-question-circle"> FAQ</i></h5>
                         <div class="card shadow">
-                            <!-- Card Header - Accordion -->
+                            <!-- Card Header - Accordion ->
                             <a href="#collapseCardExample" class="d-block card-header " data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
                                 <h6 class="m-0 font-weight-bold">Sujet info</h6>
                             </a>
-                            <!-- Card Content - Collapse -->
+                            <!-- Card Content - Collapse ->
                             <div class="collapse" id="collapseCardExample">
                                 <div class="card-body">
                                 This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
@@ -87,18 +88,26 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 border-left-dark">
+                </div>-->
+                <div class="col-lg-6 border-left-dark" id="notification">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-envelope-open"></i> Notifications</h5>
-                        <div class="card ">
-                            <div class="card-header">
-                                Titre notifications
+                        @if(isset($notifications) AND ($nombre > 0))
+                            @foreach($notifications as $notification)
+                                <div class="card">
+                                    <div class="card-body" style="font-size: 0.8em">
+                                         {{$notification->contenu}}
+                                         <br/><button class="btn btn-success pull-right btn-sm lu" value="{{$notification->id}}">Lu</button>
+                                    </div>
+                                </div><br/>
+                            @endforeach
+                        @else
+                            <div class="card">
+                                <div class="card-body">
+                                    Aucune notification
+                                </div>
                             </div>
-                            <div class="card-body">
-                                This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

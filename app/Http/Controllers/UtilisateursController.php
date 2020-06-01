@@ -115,9 +115,9 @@ class UtilisateursController extends Controller
             AND e.etablissement_id ='.$utilisateur->etablissement_id.'
             LIMIT 3'
         );
+
         #Selection de l'établissement de l'administrateurs
-        $etablissement = DB::select('SELECT libelle FROM etablissements WHERE id ='.$utilisateur->etablissement_id);
-        $etablissement = $etablissement[0]->libelle;
+        $etablissement = $utilisateur->etablissement->libelle;
 
         ##Pourcentage ops
         $Rel_depot = $this->releveEtape("Dépôt");
@@ -186,29 +186,71 @@ class UtilisateursController extends Controller
     /**
     *Fonction utilisée pour le passage des demandes
     *d'une étape à une autre
+    *Elle utilisé également pour enrégistrer les notifications
+    *Enfin elle utilisé pour l'historique
     */
     public function passage(Request $request)
     {
         $data = $request->all();
 
         if($data['type'] == 'ue'){
-            if($data['etape'] < 12){//8 pour chakir
+            if($data['etape'] < 12){#Passage à l'étape suivante
                 DB::table('unite_enseignements')
                 ->where('id', $data['id'])
                 ->update(['etape_id' => ($data['etape']+1)]);
+            }else{#Demande traité
+
+            }
+
+            #Notification
+            /*Lorsque l'administrateur clique sur "passer l'étape" de la page fin traitment
+            une notification est envoyée à l'étudiant(Enrégistrer dans la table notifications)
+            l'informant que sa réclamation a éta traitée.
+            */
+            $code = DB::select('SELECT code FROM unite_enseignements WHERE id = '.$data['id']);
+            $code = $code[0]->code;
+            $notification = 'Votre demande de réclamation pour la matière '.$code.
+                            ' a été traitée, consultez vos notes sur le portail. NB: Si la '.
+                            'note n\'a pas changée, alors votre réclamation n\'a pas abouti.';
+            if($data['etape'] == 12){
+                DB::insert('INSERT INTO notifications(contenu,etudiant_id,lu) VALUES (?,?,?)',
+                                [$notification, $data['etudiant'], false]
+                          );
             }
         }else if($data['type'] == 'releve'){
-            if($data['etape'] < 7){//5 pour chakir
+            if($data['etape'] < 7){#Passage à l'étape suivante
                 DB::table('releves')
                 ->where('id', $data['id'])
                 ->update(['etape_id' => ($data['etape']+1)]);
+            }else{#Demande traitée
+
+            }
+            #Notifications
+            /*1- Lorsque l'administrateur clique sur "passer l'étape" de la page impression
+                une notification est envoyée à l'étudiant(Enrégistrer dans la table notifications)
+                lui demandant de venir vérifier s'il y a des erreurs.
+              2-Lorsque l'administrateur clique sur "passer l'étape" de la page signature
+                une notification est envoyée à l'étudiant(Enrégistrer dans la table notifications)
+                lui demandant de venir retirer son relevé.
+            */
+            $notification1 = 'Votre relevé est imprimé, vous êtes attendus pour corriger les éventuelles erreurs.';
+            $notification2 = 'Votre relevé est disponible, vous êtes attendus pour le retrait.';
+            if($data['etape'] == 4){
+                DB::insert('INSERT INTO notifications(contenu,etudiant_id,lu) VALUES (?,?,?)',
+                                [$notification1, $data['etudiant'], false]
+                          );
+            }
+            if($data['etape'] == 6){
+                DB::insert('INSERT INTO notifications(contenu,etudiant_id,lu) VALUES (?,?,?)',
+                                [$notification2, $data['etudiant'], false]
+                          );
             }
         }
 
         return response()->json(["status" => "ok"]);
     }
 
-    ## permet de valider les donnees envoyes par le form creation utilisateur
+    # permet de valider les donnees envoyes par le form creation utilisateur
     protected function validator(array $data)
     {
         return Validator::make($data, [

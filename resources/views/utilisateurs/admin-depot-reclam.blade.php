@@ -79,13 +79,13 @@
                                     <button class="btn btn-link btn-sm voirPlusMoins" id="maitre_{{$rec->id}}">Voir plus</botton>
                                 </td>
                                 <td>
-                                    <button type="button" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="btn btn-warning btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
+                                    <button type="button" value="ue:{{$rec->id}}:{{$rec->etape_id}}:{{$rec->etudiant_id}}" class="btn btn-warning btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
                                         Passer l'etape
                                         <i class="fas fa-angle-double-right"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <input type="checkbox" value="ue:{{$rec->id}}:{{$rec->etape_id}}" class="action_groupe_checkbox" style="display:none"/>
+                                    <input type="checkbox" value="ue:{{$rec->id}}:{{$rec->etape_id}}:{{$rec->etudiant_id}}" class="action_groupe_checkbox" style="display:none"/>
                                 </td>
                             </tr>
                             <tr style="display:none; background-color:rgba(0, 0, 0, 0.05);" id="esclave_{{$rec->id}}">
