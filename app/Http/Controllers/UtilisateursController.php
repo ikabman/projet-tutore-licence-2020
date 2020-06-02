@@ -109,7 +109,7 @@ class UtilisateursController extends Controller
 
         #Selectionner les demandes pr un ets donné
         $demandes = DB::select('
-            SELECT d.id, d.date_depot, d.etat, e.name, e.first_name, d.demandeable_type
+            SELECT d.id, DATE_FORMAT(d.date_depot, \'%d-%m-%Y\') as date_depot, d.etat, e.name, e.first_name, d.demandeable_type
             FROM demandes d, etudiants e
             WHERE d.etudiant_id = e.id
             AND e.etablissement_id ='.$utilisateur->etablissement_id.'
@@ -376,7 +376,7 @@ class UtilisateursController extends Controller
                         $request->login, Hash::make($request->password),
                         $request->phone, Auth::id()
                        ]
-                   );        
+                   );
         $reussite = true; #Pour afficher le message de succès
         $active = "administrateur";#Pour le menu lateral actif
         return view('auth.update_utilisateur', compact([

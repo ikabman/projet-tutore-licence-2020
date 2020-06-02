@@ -24,7 +24,7 @@ class EtapeReleveController extends Controller
         $demandes = DB::select('
             SELECT DISTINCT e.id AS etudiant_id, r.id, e.name, e.numero_carte, e.first_name,e.numero_carte,
                             r.annee_du_releve, r.type_releve, r.etape_id, o.libelle as filiere,
-                            d.date_depot
+                            DATE_FORMAT(d.date_depot, \'%d-%m-%Y\') as date_depot
             FROM releves r, demandes d, etudiants e, etapes et, options o
             WHERE d.demandeable_id = r.id
             AND o.id = e.option_id

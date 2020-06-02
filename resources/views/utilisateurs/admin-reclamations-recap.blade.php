@@ -36,7 +36,7 @@
                             @if(count($Rec_depots) > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Code Ue</th>
@@ -76,7 +76,7 @@
                             @if(count($Rec_verifications) > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Code Ue</th>
@@ -118,7 +118,7 @@
                             @if(count($Rec_traites) > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Code Ue</th>
@@ -147,7 +147,3 @@
         </div>
     </div>
 @endsection
-
-
-
-

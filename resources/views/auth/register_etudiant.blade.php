@@ -34,7 +34,7 @@
                 <div class="col-md-3 register-left">
                     <h2>Déjà membre ?</h2>
                     <img src="/img/imageIndique.png" alt="" /><br>
-                    <a href="#" class="btn btn-1">Se connecter</a><br/>
+                    <a href="/login/etudiant" class="btn btn-1">Se connecter</a><br/>
                 </div>
                 <div class="col-md-9 register-right">
                     <h2 class="register-heading">{{ __('Inscription') }} {{ isset($url) ? ucwords($url) : ""}}</h2>

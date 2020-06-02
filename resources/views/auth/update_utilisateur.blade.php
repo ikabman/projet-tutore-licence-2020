@@ -52,7 +52,7 @@ de l'administrateur-->
                                         <div class="col-md-6">
                                             <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ $administrateur->login }}" required autocomplete="login">
                                         </div>
-                                    </div>                                    
+                                    </div>
 
                                     <div class="form-group row">
                                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de passe') }}</label>
@@ -70,6 +70,9 @@ de l'administrateur-->
 
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
+                                            <a href="/utilisateurs" class="btn btn-primary">
+                                                {{ __('Annuler') }}
+                                            </a>
                                             <button type="submit" class="btn btn-success">
                                                 {{ __('Modifier') }}
                                             </button>

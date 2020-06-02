@@ -75,7 +75,7 @@
       <li class="nav-item @if(isset($active)) @if($active =="reclamations") active @endif @endif">
         <a class="nav-link" href="/utilisateurs/reclamations">
           <i class="fas fa-shekel-sign"></i>
-          <span>Reclamations</span>
+          <span>Réclamations</span>
         </a>
       </li>
 

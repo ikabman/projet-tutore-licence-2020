@@ -39,7 +39,7 @@
                             @if($nRel_depots > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Année</th>
@@ -82,7 +82,7 @@
                             @if($nRel_impressions > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Année</th>
@@ -127,7 +127,7 @@
                             @if($nRel_verifications > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Année</th>
@@ -170,7 +170,7 @@
                             @if($nRel_signatures > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Année</th>
@@ -215,7 +215,7 @@
                             @if(count($Rel_traites) > 0)
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
                                         <th scope="col">Prenom</th>
                                         <th scope="col">Année</th>

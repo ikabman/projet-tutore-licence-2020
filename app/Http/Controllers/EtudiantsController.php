@@ -38,9 +38,17 @@ class EtudiantsController extends Controller
         ->update(['lu' => 1]);
     }
 
+    /*
+    Cette fonction renvoie les informations de payement
+    d'un étudiant
+    */
     public function payement(){
+        $infoPayements = DB::select("SELECT d.id, d.montant, DATE_FORMAT(d.date_depot, '%d-%m-%Y') as date, d.confirmation, d.demandeable_type as type
+                                     FROM demandes d
+                                     WHERE etudiant_id = ".Auth::id());
+
         $active = "payement";#Pour l'activeation du menu latéral
-        return view('etudiants.etu-payement', compact(['active']));
+        return view('etudiants.etu-payement', compact(['active', 'infoPayements']));
     }
 
     /**

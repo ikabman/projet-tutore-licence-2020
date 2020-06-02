@@ -40,8 +40,15 @@
                                     <label for="type_releve">Année scolaire du relevé</label>
                                     <select name="annee_du_releve" class="form-control @error('annee_du_releve') is-invalid @enderror" id="annee_releve">
                                         <option selected>- Choisir -</option>
-                                        <option value="2019-2020">2019-2020</option>
-                                        <option value="2018-2019">2018-2019</option>
+                                        <?php
+                                            $anneeArret = 2000;
+                                            $anneeCourante = date('Y') - 1;
+                                            for($i=$anneeCourante; $i >= $anneeArret; $i--){
+                                                echo "<option value='".$i."-".($i+1)."'>".$i."-".($i+1)."</option>";
+                                            }
+                                        ?>
+                                        <!--<option value="2019-2020">2019-2020</option>
+                                        <option value="2018-2019">2018-2019</option>-->
                                     </select>
 
                                     @error('annee_du_releve')

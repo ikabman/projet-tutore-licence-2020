@@ -154,6 +154,9 @@
 
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
+                                            <a href="/utilisateurs" class="btn btn-primary">
+                                                {{ __('Annuler') }}
+                                            </a>
                                             <button type="submit" class="btn btn-success">
                                                 {{ __('Enrégistrer') }}
                                             </button>

@@ -129,10 +129,10 @@
                         <h4 class="text-primary">Demandes récentes</h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-sm table-hover ">
+                        <table class="table table-sm table-hover table-bordered">
                             <thead >
                               <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">N°</th>
                                 <th scope="col">Etudiant</th>
                                 <th scope="col">Date de dépôt</th>
                                 <th scope="col">Type demande</th>
