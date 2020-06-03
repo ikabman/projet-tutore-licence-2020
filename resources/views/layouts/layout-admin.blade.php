@@ -91,7 +91,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
       <li class="nav-item @if(isset($active)) @if($active =="historique") active @endif @endif">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/utilisateurs/historique">
           <i class="fas fa-history"></i>
           <span>Historique</span>
         </a>

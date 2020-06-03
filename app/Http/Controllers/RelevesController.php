@@ -99,9 +99,11 @@ class RelevesController extends Controller
         */
         $id = Auth::id();
 
-        $etat = DB::select('SELECT d.etat'
-                             .' FROM demandes d'
-                             .' WHERE d.etudiant_id = '.$id);
+        $etat = DB::select('SELECT d.etat
+                            FROM demandes d
+                            WHERE d.etat = \'En cours\'
+                            AND d.montant <= 500
+                            AND d.etudiant_id = '.$id);
         if(isset($etat[0])){
             $etat = $etat[0];
         }

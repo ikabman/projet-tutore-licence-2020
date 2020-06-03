@@ -112,8 +112,8 @@ class UtilisateursController extends Controller
             SELECT d.id, DATE_FORMAT(d.date_depot, \'%d-%m-%Y\') as date_depot, d.etat, e.name, e.first_name, d.demandeable_type
             FROM demandes d, etudiants e
             WHERE d.etudiant_id = e.id
-            AND e.etablissement_id ='.$utilisateur->etablissement_id.'
-            LIMIT 3'
+            AND e.etablissement_id = '.$utilisateur->etablissement_id.'
+            ORDER BY date_depot DESC LIMIT 3'
         );
 
         #Selection de l'établissement de l'administrateurs
@@ -198,8 +198,35 @@ class UtilisateursController extends Controller
                 DB::table('unite_enseignements')
                 ->where('id', $data['id'])
                 ->update(['etape_id' => ($data['etape']+1)]);
-            }else{#Demande traité
+            }else if($data['etape'] == 12) {#Demande traité
+                #Passage du relevé à l'étape historique
+                DB::table('unite_enseignements')
+                ->where('id', $data['id'])
+                ->update(['etape_id' => 13]);
 
+                /*
+                1- Si la demande est unique (une seule matière) alors
+                    mise à jour de l'état de la demande à traitée
+                2- Si la demande est multiple plusieurs matières la demande est
+                    toujours en cours jusqu'au traitement de la dernière UE
+                */
+                $reclamation_id = DB::select('SELECT reclamation_id AS id
+                                              FROM unite_enseignements
+                                              WHERE id = '.$data['id']);
+                $reclamation_id = $reclamation_id[0]->id;
+                $nombre = DB::select('SELECT COUNT(*) as nb
+                                      FROM unite_enseignements
+                                      WHERE reclamation_id = '.$reclamation_id.
+                                      ' AND etape_id != 13');
+                $nombre = $nombre[0]->nb;
+                if($nombre == 0){
+                    #Mise à jour de l'état de la demande à traitée
+                    DB::update('UPDATE demandes
+                                SET etat = \'Traitée\'
+                                WHERE demandeable_id = '.$reclamation_id.
+                                ' AND montant >= 2000'
+                               );
+                }
             }
 
             #Notification
@@ -222,9 +249,21 @@ class UtilisateursController extends Controller
                 DB::table('releves')
                 ->where('id', $data['id'])
                 ->update(['etape_id' => ($data['etape']+1)]);
-            }else{#Demande traitée
+            }else if($data['etape'] == 7){#Relevé traitée
+                #Passage du relevé à l'étape historique
+                DB::table('releves')
+                ->where('id', $data['id'])
+                ->update(['etape_id' => 13]);
 
+                #Mise à jour de l'état de la demande à traitée
+                DB::update('UPDATE demandes
+                            SET etat = \'Traitée\'
+                            WHERE demandeable_id = '.$data['id'].
+                            ' AND montant <= 500'
+                           );
             }
+
+
             #Notifications
             /*1- Lorsque l'administrateur clique sur "passer l'étape" de la page impression
                 une notification est envoyée à l'étudiant(Enrégistrer dans la table notifications)
@@ -233,8 +272,8 @@ class UtilisateursController extends Controller
                 une notification est envoyée à l'étudiant(Enrégistrer dans la table notifications)
                 lui demandant de venir retirer son relevé.
             */
-            $notification1 = 'Votre relevé est imprimé, vous êtes attendus pour corriger les éventuelles erreurs.';
-            $notification2 = 'Votre relevé est disponible, vous êtes attendus pour le retrait.';
+            $notification1 = 'Votre relevé est imprimé, vous êtes attendu pour corriger les éventuelles erreurs.';
+            $notification2 = 'Votre relevé est disponible, vous êtes attendu pour le retrait.';
             if($data['etape'] == 4){
                 DB::insert('INSERT INTO notifications(contenu,etudiant_id,lu) VALUES (?,?,?)',
                                 [$notification1, $data['etudiant'], false]
@@ -382,6 +421,38 @@ class UtilisateursController extends Controller
         return view('auth.update_utilisateur', compact([
             'reussite',
             'active']));
+    }
+
+    /**Affiche les 50 dernières demandes traitées relevés comme réclamations*/
+    public function historique(){
+
+        $utilisateur = Auth::user();
+
+        $historiqueReleves = DB::select('
+        SELECT DISTINCT d.id, DATE_FORMAT(d.date_depot, \'%d-%m-%Y\') as date_depot, e.name, e.first_name, r.type_releve
+        FROM demandes d, etudiants e, releves r
+        WHERE d.etudiant_id = e.id
+        AND d.demandeable_id = r.id
+        AND r.etape_id = 13
+        AND d.montant <= 500
+        AND e.etablissement_id = '.$utilisateur->etablissement_id.'
+        ORDER BY date_depot DESC LIMIT 25');
+
+        $historiqueReclamations = DB::select('
+        SELECT DISTINCT d.id, DATE_FORMAT(d.date_depot, \'%d-%m-%Y\') as date_depot, e.name, e.first_name, ue.code
+        FROM demandes d, etudiants e, reclamations r, unite_enseignements ue
+        WHERE d.etudiant_id = e.id
+        AND d.demandeable_id = r.id
+        AND r.id = ue.reclamation_id
+        AND ue.etape_id = 13
+        AND d.montant >= 2000
+        AND e.etablissement_id = '.$utilisateur->etablissement_id.'
+        ORDER BY date_depot DESC LIMIT 25');
+
+        $active = "historique";
+        return view('utilisateurs.historique', compact([
+            'active', 'historiqueReleves', 'historiqueReclamations'
+        ]));
     }
 
     /**

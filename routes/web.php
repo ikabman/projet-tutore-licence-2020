@@ -20,7 +20,7 @@ Auth::logout();
 
 Route::get('/login/utilisateur', 'Auth\LoginController@showUtilisateurLoginForm');
 Route::get('/login/etudiant', 'Auth\LoginController@showEtudiantLoginForm');
-#Route::get('/register/utilisateur', 'Auth\RegisterController@showUtilisateurRegisterForm'); méthode renommée newAdmin() dans UtilisateurControlleur
+#Route::get('/register/utilisateur', 'Auth\RegisterController@showUtilisateurRegisterForm');
 Route::get('/register/etudiant', 'Auth\RegisterController@showEtudiantRegisterForm');
 
 Route::post('/login/utilisateur', 'Auth\LoginController@utilisateurLogin');
@@ -55,6 +55,7 @@ Route::get('/utilisateurs/releves/impressions', 'EtapeReleveController@impressio
 Route::get('/utilisateurs/releves/verifications', 'EtapeReleveController@verifications');# page index des releves a l'etape Verification
 Route::get('/utilisateurs/releves/signatures', 'EtapeReleveController@signatures');# page index des releves a l'etape Signature
 Route::get('/utilisateurs/releves/traites', 'EtapeReleveController@traites');# page index des releves a l'etape Traite
+Route::get('/utilisateurs/historique', 'UtilisateursController@historique');
 
 ###Création d'un nouvel administrateur
 Route::get('/register/utilisateur', 'UtilisateursController@create');
