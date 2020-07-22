@@ -13,9 +13,14 @@ class PayementTestApi extends Controller implements Payement
         $parametres = $request->all();
         $identifiantPayement = $parametres['identifiant_payement'];
 
-        $donnees = DB::select('SELECT e.name AS Nom, e.first_name AS Prénom, e.numero_carte as \'Numero de carte\', et.libelle AS Etablissement, o.libelle AS Libelle, d.montant AS Montant '
+        $donnees = DB::select('SELECT e.name AS Nom, e.first_name AS Prénom,
+                                      e.numero_carte as \'Numero de carte\',
+                                      et.libelle AS Etablissement,
+                                      o.libelle AS Libelle,
+                                      d.montant AS Montant,
+                                      d.date_depot AS \'Date demande\' '
                              .'FROM etudiants e, etablissements et, options o, demandes d '
-                             .'WHERE e.id = d.demandeable_id '
+                             .'WHERE e.id = etudiant_id '
                              .'AND e.option_id = o.id '
                              .'AND e.etablissement_id =  et.id '
                              .'AND d.id = '.$identifiantPayement);
