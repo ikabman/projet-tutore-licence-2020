@@ -56,7 +56,7 @@
       <li class="nav-item @if(isset($active)) @if($active =="dashboard") active @endif @endif">
         <a class="nav-link" href="/utilisateurs">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <span>Tableau de bord</span>
         </a>
       </li>
 

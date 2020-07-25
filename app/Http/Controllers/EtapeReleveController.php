@@ -21,12 +21,14 @@ class EtapeReleveController extends Controller
     */
     public function releves($etapeId){
         $utilisateur = Auth::user();
+        $type = 'App\\\Releve';
         $demandes = DB::select('
             SELECT DISTINCT e.id AS etudiant_id, r.id, e.name, e.numero_carte, e.first_name,e.numero_carte,
                             r.annee_du_releve, r.type_releve, r.etape_id, o.libelle as filiere,
                             DATE_FORMAT(d.date_depot, \'%d-%m-%Y\') as date_depot
             FROM releves r, demandes d, etudiants e, etapes et, options o
             WHERE d.demandeable_id = r.id
+            AND d.demandeable_type = \''.$type.'\'
             AND o.id = e.option_id
             AND r.etape_id = '.$etapeId.'
             AND d.etudiant_id = e.id
