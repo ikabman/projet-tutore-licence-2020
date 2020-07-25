@@ -9,9 +9,46 @@
 		body{
 			background-color:rgba(0, 0, 0, 0.03);
 		}
+	    .lien{
+	        color:white;
+	    }
+	    .navigation{
+	        background-color:#2a5d84;
+	        padding: 0;
+	    }
+	    .lien:hover{
+	        color: yellow;
+	    }
 	</style>
 </head>
-<body style="margin-top:5%">
+<body>
+	<nav class="navbar navbar-expand-md shadow-sm navigation" style="margin-bottom:5%">
+		<div class="container-fluid">
+			<span class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+				<div class="sidebar-brand-icon">
+					<img src="/img/logo.png" alt="" style="width:60px; height: 80px"/>
+				</div>
+			</span>
+			<a class="navbar-brand lien" href="/">
+				Relevés et Réclamations
+			</a>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Left Side Of Navbar -->
+				<ul class="navbar-nav mr-auto">
+
+				</ul>
+
+				<!-- Right Side Of Navbar -->
+				<ul class="navbar-nav ml-auto">
+					<!-- Authentication Links -->
+					<li class="nav-item">
+						<a class="nav-link lien" href="/login/utilisateur">Se connecter</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
     <div class="container">
         <div class="row" style="margin-bottom:5%">
             <div class="offset-md-3 ol-md-8">
@@ -76,7 +113,7 @@
                                     </button>
 
                                     @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link" href="#">
                                             {{ __('Mot de passe oublié?') }}
                                         </a>
                                     @endif

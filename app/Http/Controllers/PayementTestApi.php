@@ -57,12 +57,14 @@ class PayementTestApi extends Controller implements Payement
         NB: l'admin ne voit pas les étapes demandes, payement, il ne voit que les etapes
         à partir de dépôt
         */
+        $typeReleve = "App\\\Releve";
+        $typeReclamation = "App\\\Reclamation";
         $reclamation_id = DB::select('SELECT r.id'
                              .' FROM reclamations r, demandes d'
-                             .' WHERE r.id = d.demandeable_id'
-                             .' AND d.montant >= 2000'
+                             .' WHERE r.id = d.demandeable_id'                             
                              .' AND d.etat = \'En cours\''
                              .' AND d.confirmation = 1'
+                             .' AND d.demandeable_type = \''.$typeReclamation.'\''
                              .' AND d.id = '.$identifiantPayement);
 
 
@@ -76,9 +78,9 @@ class PayementTestApi extends Controller implements Payement
         $releve_id =  DB::select('SELECT d.demandeable_id'
                              .' FROM releves r, demandes d'
                              .' WHERE r.id = d.demandeable_id'
-                             .' AND d.montant BETWEEN 0 AND 500'
                              .' AND d.etat = \'En cours\''
                              .' AND d.confirmation = 1'
+                             .' AND d.demandeable_type = \''.$typeReleve.'\''
                              .' AND d.id = '.$identifiantPayement);
 
          if(isset($releve_id[0])){

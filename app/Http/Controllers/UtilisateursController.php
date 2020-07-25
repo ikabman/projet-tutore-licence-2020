@@ -220,11 +220,12 @@ class UtilisateursController extends Controller
                                       ' AND etape_id != 13');
                 $nombre = $nombre[0]->nb;
                 if($nombre == 0){
+                    $type = "App\\\Reclamation";
                     #Mise à jour de l'état de la demande à traitée
                     DB::update('UPDATE demandes
                                 SET etat = \'Traitée\'
                                 WHERE demandeable_id = '.$reclamation_id.
-                                ' AND montant >= 2000'
+                                ' AND demandeable_type = \''.$type.'\''
                                );
                 }
             }
@@ -256,10 +257,11 @@ class UtilisateursController extends Controller
                 ->update(['etape_id' => 13]);
 
                 #Mise à jour de l'état de la demande à traitée
+                $type = "App\\\Releve";
                 DB::update('UPDATE demandes
                             SET etat = \'Traitée\'
-                            WHERE demandeable_id = '.$data['id'].
-                            ' AND montant <= 500'
+                            WHERE demandeable_id = '.$data['id'].'
+                            AND demandeable_type = \''.$type.'\''
                            );
             }
 
@@ -425,6 +427,8 @@ class UtilisateursController extends Controller
 
     /**Affiche les 50 dernières demandes traitées relevés comme réclamations*/
     public function historique(){
+        $typeReleve = "App\\\Releve";
+        $typeReclamation = "App\\\Reclamation";
 
         $utilisateur = Auth::user();
 
@@ -434,7 +438,7 @@ class UtilisateursController extends Controller
         WHERE d.etudiant_id = e.id
         AND d.demandeable_id = r.id
         AND r.etape_id = 13
-        AND d.montant <= 500
+        AND d.demandeable_type = \''.$typeReleve.'\'
         AND e.etablissement_id = '.$utilisateur->etablissement_id.'
         ORDER BY date_depot DESC LIMIT 25');
 
@@ -445,7 +449,7 @@ class UtilisateursController extends Controller
         AND d.demandeable_id = r.id
         AND r.id = ue.reclamation_id
         AND ue.etape_id = 13
-        AND d.montant >= 2000
+        AND d.demandeable_type = \''.$typeReclamation.'\'
         AND e.etablissement_id = '.$utilisateur->etablissement_id.'
         ORDER BY date_depot DESC LIMIT 25');
 

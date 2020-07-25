@@ -95,7 +95,7 @@
                                     <div class="form-group row">
                                         <div class="offset-md-2 col-md-8">
                                             <select class="form-control @error('etablissement') is-invalid @enderror" name="etablissement" value="{{ old('etablissement') }}">
-                                                <option>{{ __('Faculté/Etablissement/Ecole') }}</option>
+                                                <option>{{ __('Etablissement') }}</option>
                                                 @foreach($etablissements as $etablissement)
                                                 <option value="{{$etablissement['id']}}">
                                                     {{$etablissement['libelle']}} @if($etablissement['libelle_court']!=null)({{$etablissement['libelle_court']}})@endif

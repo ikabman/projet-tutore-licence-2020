@@ -12,7 +12,7 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <p class="text-black h4 my-3" >
-                        Veuillez saisir les information nécessaire à la reclamation de notes dans le formulaire ci-dessous!
+                        Veuillez saisir les informations nécessaires à la reclamation de notes dans le formulaire ci-dessous!
                     </p>
                     <form action="/reclamations" method="POST" class="reclam-form" id="demande">
                         <input type="hidden" name="nombre" value="1" id="nombre" required/>

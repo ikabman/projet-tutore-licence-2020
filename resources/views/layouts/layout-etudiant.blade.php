@@ -139,7 +139,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#notification">
                   <div>
-                    <span class="font-weight-bold">@if(isset($nombre) AND ($nombre > 0))Vous avez {{$nombre}} nouvelles notifications @else Aucune nouvelle notification @endif</span>
+                    <span class="font-weight-bold">@if(isset($nombre) AND ($nombre > 0))Vous avez {{$nombre}} nouvelle(s) notification(s) @else Aucune nouvelle notification @endif</span>
                   </div>
                 </a>
                 <!--<a class="dropdown-item d-flex align-items-center" href="#">

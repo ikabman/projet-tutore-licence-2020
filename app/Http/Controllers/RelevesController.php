@@ -98,11 +98,12 @@ class RelevesController extends Controller
         *le bouton valider du formulaire est désactivé.
         */
         $id = Auth::id();
+        $typeReleve = "App\\\Releve";
 
         $etat = DB::select('SELECT d.etat
                             FROM demandes d
                             WHERE d.etat = \'En cours\'
-                            AND d.montant <= 500
+                            AND d.demandeable_type = \''.$typeReleve.'\'
                             AND d.etudiant_id = '.$id);
         if(isset($etat[0])){
             $etat = $etat[0];
@@ -161,13 +162,14 @@ class RelevesController extends Controller
 
     public function etape()
     {
+        $typeReleve = "App\\\Releve";
         $id = Auth::id();
 
         //Selection de la demande de relevé en cours pour l'étudiant
         $releve = DB::select('SELECT r.type_releve, r.annee_du_releve, r.etape_id'
                              .' FROM releves r, demandes d'
                              .' WHERE r.id = d.demandeable_id'
-                             .' AND d.montant BETWEEN 0 AND 500'
+                             .' AND d.demandeable_type = \''.$typeReleve.'\''
                              .' AND d.etat = \'En cours\''
                              .' AND d.etudiant_id = '.$id);
         if(isset($releve[0])){
