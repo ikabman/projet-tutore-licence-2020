@@ -78,7 +78,7 @@
                                         <td>{{$rel->annee_du_releve}}</td>
                                         <td>{{$rel->type_releve}}</td>
                                         <td>
-                                            <button class="btn btn-link btn-sm voirPlusMoins" id="maitre_{{$rel->id}}">Voir plus</botton>
+                                            <button class="btn btn-link btn-sm voirPlusMoins" id="maitre_{{$rel->id}}">Voir plus</button>
                                         </td>
                                         <td>
                                             <input type="checkbox" value="releve:{{$rel->id}}:{{$rel->etape_id}}:{{$rel->etudiant_id}}" class="action_groupe_checkbox" style="display:none"/>
