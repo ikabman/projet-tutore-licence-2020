@@ -22,16 +22,16 @@
         <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/etu-connexion.css" />
         <style>
-        .lien{
-            color:white;
-        }
-        .navigation{
-            background-color:#2a5d84;
-            padding: 0;
-        }
-        .lien:hover{
-            color: yellow;
-        }
+            .lien{
+                color:white;
+            }
+            .navigation{
+                background-color:#2a5d84;
+                padding: 0;
+            }
+            .lien:hover{
+                color: yellow;
+            }
         </style>
     </head>
     <body>
