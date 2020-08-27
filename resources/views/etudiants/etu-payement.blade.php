@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
             <p>
-                <h1 class="text-center" style="font-size: 2em; color: #4e73df">Informations de payement</h1>
+                <h1 class="text-center" style="font-size: 2em; color: #3D0AE2">Informations de payement</h1>
             </p>
             <table class="table table-sm table-hover table-bordered table-primary">
                 <thead>

@@ -67,3 +67,5 @@ Route::post('/edit/utilisateur', 'UtilisateursController@update');
 
 ##Action administrateur
 Route::post('/utilisateurs/actions', 'UtilisateursController@passage');
+
+Route::get('/utilisateurs/admins', 'UtilisateursController@administrateur');

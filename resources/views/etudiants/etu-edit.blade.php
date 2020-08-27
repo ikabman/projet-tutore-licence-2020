@@ -11,7 +11,7 @@
     <div class="row justify-content-center" style="margin-bottom: 5%">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center" style="background-color: #4e73df; color: white">Modifications de vos informations personnelles</div>
+                <div class="card-header text-center" style="background-color: #3D0AE2; color: white">Modifications de vos informations personnelles</div>
 
                 <div class="card-body">
                     <form method="POST" action="/edit/etudiant">

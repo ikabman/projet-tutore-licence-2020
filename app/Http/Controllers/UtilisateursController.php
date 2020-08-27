@@ -320,7 +320,7 @@ class UtilisateursController extends Controller
         observateur (condition if ci-dessous)
         */
         $administrateur = Auth::user();
-        if($administrateur->role->libelle  == 'Administrateur'){
+        if($administrateur->role->libelle  == 'Superadmin'){
             $roles = \App\Role::select('id', 'libelle')->orderBy('libelle')->get();
         }else{
             $roles = \App\Role::select('id', 'libelle')
@@ -457,6 +457,19 @@ class UtilisateursController extends Controller
         return view('utilisateurs.historique', compact([
             'active', 'historiqueReleves', 'historiqueReclamations'
         ]));
+    }
+
+    public function administrateur(){
+        $utilisateur = Auth::user();
+
+        $admins = DB::select('
+        SELECT e.id, e.name, e.first_name, r.libelle
+        FROM utilisateurs e, roles r
+        WHERE e.etablissement_id ='.$utilisateur->etablissement_id.'
+        AND e.role_id = r.id'
+        
+        );
+        return view("utilisateurs.administrateur", compact(['admins']));
     }
 
     /**

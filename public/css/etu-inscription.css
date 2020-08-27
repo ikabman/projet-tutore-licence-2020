@@ -3,7 +3,7 @@ body {
 }
 
 .register {
-    background: #4e73df;
+    background: #3D0AE2;
     margin-top: 50px;
     padding: 2%;
     box-shadow: 1px 1px 4px black;
@@ -97,7 +97,7 @@ body {
     border: none;
     border-radius: 0 30px 0 30px;
     padding: 1%;
-    background: rgb(61, 190, 241);
+    background: #3D0AE2;
     color: #fff;
     font-weight: 800;
     width: 100%;

@@ -46,7 +46,7 @@ html, body,
     margin-bottom: 30px;
     /*font-weight: 800;
     font-size: 30px;*/
-    color: #6967e2;
+    color: #3D0AE2;
 }
 
 .login-sec h2:after {
@@ -93,7 +93,7 @@ html, body,
     padding-left: 20px;
     padding-top: 20px;
     padding-right: 20px;
-    background: rgb(60, 147, 240);
+    background: #3D0AE2/*rgb(60, 147, 240)*/;
     ;
     height: 430px;
     overflow: auto;

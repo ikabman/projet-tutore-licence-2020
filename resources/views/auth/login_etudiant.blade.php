@@ -26,7 +26,7 @@
                 color:white;
             }
             .navigation{
-                background-color:#2a5d84;
+                background-color:#3D0AE2;
                 padding: 0;
             }
             .lien:hover{
@@ -113,7 +113,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-block btn-primary btn-xl">
+                                <button type="submit" class="btn btn-block btn-xl" style = "background:#3D0AE2; color:white">
                                     {{ __('Se connecter') }}
                                 </button>
                             </div>

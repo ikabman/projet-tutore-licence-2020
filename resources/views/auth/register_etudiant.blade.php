@@ -32,7 +32,7 @@ P.S: prendre en compte ce renommage; ne pas le changer.
         color:white;
     }
     .navigation{
-        background-color:#2a5d84;
+        background-color:#3D0AE2;
         padding: 0;
     }
     .lien:hover{
