@@ -73,7 +73,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Relevés/étapes</h6>
                     </div>
                     <div class="card-body bg-white ">
-                        <h6 class="text-dark text-md">Depôt</h6>
+                        <h6 class="text-dark text-md">Dépôt</h6>
                         <div class="progress mb-1">
                             <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{$p_depot}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -114,7 +114,7 @@
                                 <i class="fas fa-circle text-info"></i> Relevés
                             </span>
                             <span class="mr-2">
-                                <i class="fas fa-circle text-warning"></i> Reclamations
+                                <i class="fas fa-circle text-warning"></i> Réclamations
                             </span>
                         </div>
                     </div>

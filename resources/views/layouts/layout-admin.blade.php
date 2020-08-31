@@ -14,7 +14,7 @@
   -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Relevés & Reclamations</title>
+  <title>Relevés & Réclamations</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -79,7 +79,7 @@
         </a>
       </li>
 
-      @if(Auth::user()->role->libelle  == 'Superadmin')
+      @if(Auth::user()->role->libellé  == 'Superadmin')
       <!-- Divider -->
       <hr class="sidebar-divider">
       <li class="nav-item @if(isset($active)) @if($active =="administrateur") active @endif @endif">
@@ -116,7 +116,7 @@
           <!-- Sidebar Toggle (Topbar) -->
 
             <span class="titleR">
-                Releve et Reclamations<sup> Admin</sup>
+                Relevé et Réclamations<sup> Admin</sup>
             </span>
           <!-- Topbar Search -->
 
@@ -162,7 +162,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Deconnexion
+                    Déconnexion
                 </a>
               </div>
             </li>

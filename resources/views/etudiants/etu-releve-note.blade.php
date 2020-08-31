@@ -3,7 +3,7 @@
     <div class="container">
         <!-- titre de la page -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2 ">
-            <h1 class="mb-3 text-primary mx-auto">Releves de notes <i class="fas fa-file-invoice"></i></h1>
+            <h1 class="mb-3 text-primary mx-auto">Relevés de notes <i class="fas fa-file-invoice"></i></h1>
         </div>
 
         <div class="row my-3">

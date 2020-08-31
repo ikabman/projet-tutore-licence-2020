@@ -3,7 +3,7 @@
 <div class="container">
     <!-- titre de la page -->
     <div class="d-sm-flex align-items-center justify-content-between mb-2 ">
-        <h1 class=" mb-3 text-primary mx-auto">Reclamations de notes</h1>
+        <h1 class=" mb-3 text-primary mx-auto">Réclamations de notes</h1>
     </div>
 
     <!-- formulaire -->
@@ -12,7 +12,7 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <p class="text-black h4 my-3" >
-                        Veuillez saisir les informations nécessaires à la reclamation de notes dans le formulaire ci-dessous!
+                        Veuillez saisir les informations nécessaires à la réclamation de notes dans le formulaire ci-dessous!
                     </p>
                     <form action="/reclamations" method="POST" class="reclam-form" id="demande">
                         <input type="hidden" name="nombre" value="1" id="nombre" required/>
@@ -30,7 +30,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-8">
-                                    <label for="libelle">Libelle UE</label>
+                                    <label for="libelle">Libellé UE</label>
                                     <input type="text" class="form-control @error('libelle') is-invalid @enderror" name="libelle" required>
                                     @error('libelle')
                                     <span class="invalid-feedback" role="alert">

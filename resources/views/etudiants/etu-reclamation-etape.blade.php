@@ -3,7 +3,7 @@
     @if($ues)
         <link rel="stylesheet" href="/css/shopping-cart0.css" />
         <div class="text-center">
-            <h2 class="">Progression de votre reclamation de notes</h2>
+            <h2 class="">Progression de votre réclamation de notes</h2>
         </div>
         @foreach ($ues as $ue)
             <div>

@@ -65,7 +65,7 @@
                 <div class="col-lg-6 ">
                     <button href="#" class="card bg-success text-white shadow">
                         <div class="card-body">
-                            <a href="/etudiants/reclamations/create" class="text-white text-uppercase text-decoration-none">Reclamations de notes</a>
+                            <a href="/etudiants/reclamations/create" class="text-white text-uppercase text-decoration-none">Réclamations de notes</a>
                         </div>
                     </button>
                 </div>

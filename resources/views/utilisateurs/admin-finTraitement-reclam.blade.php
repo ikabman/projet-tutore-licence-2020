@@ -24,7 +24,7 @@
                 <div class="col-lg-3">
                     <button type="button" class="btn btn-success btn-md float-md-right text-white text-bold passer_etape_groupe_btn"
                     style="display:none">
-                        Passer l'etape
+                        Passer l'étape
                         <i class="fas fa-angle-double-right"></i>
                     </button>
                 </div>
@@ -51,7 +51,7 @@
                             <!--<th scope="col" style="width: 1em;">#</th>-->
                             <th scope="col">Carte</th>
                             <th scope="col">Nom</th>
-                            <th scope="col">Prenom</th>
+                            <th scope="col">Prénom</th>
                             <th scope="col">Code Ue</th>
                             <th scope="col">Evaluation</th>
                             <th scope="col"></th>
@@ -80,7 +80,7 @@
                             </td>
                             <td>
                                 <button type="button" value="ue:{{$rec->id}}:{{$rec->etape_id}}:{{$rec->etudiant_id}}" class="btn btn-success btn-sm float-md-right text-white text-bold passer_etape_unique_btn">
-                                    Passer l'etape
+                                    Passer l'étape
                                     <i class="fas fa-angle-double-right"></i>
                                 </button>
                             </td>

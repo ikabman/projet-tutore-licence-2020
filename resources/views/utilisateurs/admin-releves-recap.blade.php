@@ -41,7 +41,7 @@
                                     <tr>
                                         <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Prénom</th>
                                         <th scope="col">Année</th>
                                         <th scope="col">Type de relevé</th>
                                     </tr>
@@ -84,7 +84,7 @@
                                     <tr>
                                         <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Prénom</th>
                                         <th scope="col">Année</th>
                                         <th scope="col">Type de relevé</th>
                                     </tr>
@@ -129,7 +129,7 @@
                                     <tr>
                                         <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Prénom</th>
                                         <th scope="col">Année</th>
                                         <th scope="col">Type de relevé</th>
                                     </tr>
@@ -172,7 +172,7 @@
                                     <tr>
                                         <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Prénom</th>
                                         <th scope="col">Année</th>
                                         <th scope="col">Type de relevé</th>
                                     </tr>
@@ -217,7 +217,7 @@
                                     <tr>
                                         <th scope="col">N°</th>
                                         <th scope="col">Nom</th>
-                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Prénom</th>
                                         <th scope="col">Année</th>
                                         <th scope="col">Type de relevé</th>
                                     </tr>

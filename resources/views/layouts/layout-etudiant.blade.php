@@ -13,7 +13,7 @@
   -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Relevés & Reclamations</title>
+  <title>Relevés & Réclamations</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -71,7 +71,7 @@
       <li class="nav-item @if(isset($active) AND $active == 'reclamations') active @endif">
         <a class="nav-link" href="/etudiants/reclamations/etapes">
           <i class="fas fa-shekel-sign"></i>
-          <span>Reclamations</span></a>
+          <span>Réclamations</span></a>
       </li>
 
       <!-- Divider -->
@@ -99,7 +99,7 @@
           <!-- Sidebar Toggle (Topbar) -->
 
             <span class="titleR">
-                Releve et Reclamations<sup> Etu</sup>
+                Relevé et Réclamations<sup> Etu</sup>
             </span>
           <!-- Topbar Search -->
 
@@ -194,7 +194,7 @@
                 <!--**-->
                 <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    {{ __('Deconnexion') }}
+                    {{ __('Déconnexion') }}
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
