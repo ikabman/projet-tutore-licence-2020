@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="row my-2">
                 <div class="col-lg-5">
-                    <span class="text-left h1" style="font-size: 2em; color: #4e73df">Tous les administrateur </span>
+                    <span class="text-left h1" style="font-size: 2em; color: #4e73df">Administrateurs </span>
                 </div>
                 <div class="col-lg-7">
                     <a class = "btn btn-primary text-right float-right" href="/register/utilisateur">Ajouter un administrateur</a>

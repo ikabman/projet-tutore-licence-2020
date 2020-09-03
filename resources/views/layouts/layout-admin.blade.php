@@ -79,10 +79,10 @@
         </a>
       </li>
 
-      @if(Auth::user()->role->libellé  == 'Superadmin')
+      @if(Auth::user()->role->libelle  == 'Superadmin')
       <!-- Divider -->
       <hr class="sidebar-divider">
-      <li class="nav-item @if(isset($active)) @if($active =="administrateur") active @endif @endif">
+      <li class="nav-item @if(isset($active)) @if($active =='administrateur') active @endif @endif">
         <a class="nav-link" href="/utilisateurs/admins">
           <i class="fas fa-user"></i>
           <span>Administrateurs</span>
